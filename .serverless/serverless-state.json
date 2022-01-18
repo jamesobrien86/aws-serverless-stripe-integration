@@ -241,7 +241,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/serverless-stripe-integration/dev/1642547108482-2022-01-18T23:05:08.482Z/hello.zip"
+                "S3Key": "serverless/serverless-stripe-integration/dev/1642548825471-2022-01-18T23:33:45.471Z/hello.zip"
               },
               "Handler": "s_hello.handler",
               "Runtime": "nodejs14.x",
@@ -272,7 +272,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/serverless-stripe-integration/dev/1642547108482-2022-01-18T23:05:08.482Z/createCustomer.zip"
+                "S3Key": "serverless/serverless-stripe-integration/dev/1642548825471-2022-01-18T23:33:45.471Z/createCustomer.zip"
               },
               "Handler": "s_createCustomer.handler",
               "Runtime": "nodejs14.x",
@@ -296,24 +296,24 @@
               "CreateCustomerLogGroup"
             ]
           },
-          "HelloLambdaVersioniRazBA7tnGh1J9LAyBTPrK8AR9PHntpWCYKzfR8YLwk": {
+          "HelloLambdaVersionl1ay4IUF6VGGdB68mssWdFqaulQ2uQHzlsFH5uuQ": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "HelloLambdaFunction"
               },
-              "CodeSha256": "zbIJ8TdHn81i2StVdk5B++rXiSp4O1ZMs0vHEofA/Go="
+              "CodeSha256": "VQ9t3v/wD/7tgnUGTYQeG6PcGLKwdkQKizEKJBwQyn0="
             }
           },
-          "CreateCustomerLambdaVersionGC11pfeuvpUsX0NmT6r3EqrwBktVmMjpVxdTKd8yV1Y": {
+          "CreateCustomerLambdaVersionwYVhlMqgtvIO1Pd5l5Qt3V9TS9xuW1THsjsFUHuO5c": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "CreateCustomerLambdaFunction"
               },
-              "CodeSha256": "JxzEmDr1wOrWOmmO+WkKCtM0fUthDcDvyR32Ne3iM5w="
+              "CodeSha256": "Ue5boVsS/pRSXIN0tI/9h4QvK6tJD588ZAwKjNNpTZ0="
             }
           },
           "ApiGatewayRestApi": {
@@ -511,7 +511,7 @@
                   "email": {
                     "type": "string"
                   },
-                  "username": {
+                  "name": {
                     "type": "string"
                   }
                 },
@@ -521,7 +521,7 @@
               }
             }
           },
-          "ApiGatewayDeployment1642547102209": {
+          "ApiGatewayDeployment1642548819216": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -717,7 +717,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/serverless-stripe-integration/dev/1642547108482-2022-01-18T23:05:08.482Z/custom-resources.zip"
+                "S3Key": "serverless/serverless-stripe-integration/dev/1642548825471-2022-01-18T23:33:45.471Z/custom-resources.zip"
               },
               "FunctionName": "serverless-stripe-integration-dev-custom-resource-apigw-cw-role",
               "Handler": "apiGatewayCloudWatchRole/handler.handler",
@@ -789,7 +789,7 @@
           "HelloLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "HelloLambdaVersioniRazBA7tnGh1J9LAyBTPrK8AR9PHntpWCYKzfR8YLwk"
+              "Ref": "HelloLambdaVersionl1ay4IUF6VGGdB68mssWdFqaulQ2uQHzlsFH5uuQ"
             },
             "Export": {
               "Name": "sls-serverless-stripe-integration-dev-HelloLambdaFunctionQualifiedArn"
@@ -798,7 +798,7 @@
           "CreateCustomerLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "CreateCustomerLambdaVersionGC11pfeuvpUsX0NmT6r3EqrwBktVmMjpVxdTKd8yV1Y"
+              "Ref": "CreateCustomerLambdaVersionwYVhlMqgtvIO1Pd5l5Qt3V9TS9xuW1THsjsFUHuO5c"
             },
             "Export": {
               "Name": "sls-serverless-stripe-integration-dev-CreateCustomerLambdaFunctionQualifiedArn"
@@ -967,7 +967,7 @@
         "timeout": 12,
         "runtime": "nodejs14.x",
         "vpc": {},
-        "versionLogicalId": "HelloLambdaVersioniRazBA7tnGh1J9LAyBTPrK8AR9PHntpWCYKzfR8YLwk"
+        "versionLogicalId": "HelloLambdaVersionl1ay4IUF6VGGdB68mssWdFqaulQ2uQHzlsFH5uuQ"
       },
       "createCustomer": {
         "handler": "s_createCustomer.handler",
@@ -995,7 +995,7 @@
         "timeout": 12,
         "runtime": "nodejs14.x",
         "vpc": {},
-        "versionLogicalId": "CreateCustomerLambdaVersionGC11pfeuvpUsX0NmT6r3EqrwBktVmMjpVxdTKd8yV1Y"
+        "versionLogicalId": "CreateCustomerLambdaVersionwYVhlMqgtvIO1Pd5l5Qt3V9TS9xuW1THsjsFUHuO5c"
       }
     },
     "configValidationMode": "warn",
@@ -1033,7 +1033,7 @@
   },
   "package": {
     "individually": true,
-    "artifactDirectoryName": "serverless/serverless-stripe-integration/dev/1642547108482-2022-01-18T23:05:08.482Z",
+    "artifactDirectoryName": "serverless/serverless-stripe-integration/dev/1642548825471-2022-01-18T23:33:45.471Z",
     "artifact": ""
   }
 }
