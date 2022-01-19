@@ -3,6 +3,7 @@ import type { AWS } from "@serverless/typescript";
 import hello from "@functions/hello";
 import createCustomer from "@functions/createCustomer";
 import createSubscription from "@functions/createSubscription";
+import handleSubscription from "@functions/handleSubscription";
 
 const serverlessConfiguration: AWS = {
 	service: "serverless-stripe-integration",
@@ -27,7 +28,7 @@ const serverlessConfiguration: AWS = {
 		lambdaHashingVersion: "20201221",
 	},
 	// import the function via paths
-	functions: { hello, createCustomer, createSubscription },
+	functions: { hello, createCustomer, createSubscription, handleSubscription },
 	package: { individually: true },
 	custom: {
 		esbuild: {
