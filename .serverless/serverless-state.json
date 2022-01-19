@@ -105,6 +105,18 @@
               "LogGroupName": "/aws/lambda/serverless-stripe-integration-dev-createCustomer"
             }
           },
+          "CreateSubscriptionLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/serverless-stripe-integration-dev-createSubscription"
+            }
+          },
+          "HandleSubscriptionLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/serverless-stripe-integration-dev-handleSubscription"
+            }
+          },
           "IamRoleLambdaExecution": {
             "Type": "AWS::IAM::Role",
             "Properties": {
@@ -225,6 +237,18 @@
                               "CreateCustomerLogGroup",
                               "Arn"
                             ]
+                          },
+                          {
+                            "Fn::GetAtt": [
+                              "CreateSubscriptionLogGroup",
+                              "Arn"
+                            ]
+                          },
+                          {
+                            "Fn::GetAtt": [
+                              "HandleSubscriptionLogGroup",
+                              "Arn"
+                            ]
                           }
                         ]
                       }
@@ -241,7 +265,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/serverless-stripe-integration/dev/1642548825471-2022-01-18T23:33:45.471Z/hello.zip"
+                "S3Key": "serverless/serverless-stripe-integration/dev/1642590998336-2022-01-19T11:16:38.336Z/hello.zip"
               },
               "Handler": "s_hello.handler",
               "Runtime": "nodejs14.x",
@@ -272,7 +296,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/serverless-stripe-integration/dev/1642548825471-2022-01-18T23:33:45.471Z/createCustomer.zip"
+                "S3Key": "serverless/serverless-stripe-integration/dev/1642590998336-2022-01-19T11:16:38.336Z/createCustomer.zip"
               },
               "Handler": "s_createCustomer.handler",
               "Runtime": "nodejs14.x",
@@ -296,24 +320,106 @@
               "CreateCustomerLogGroup"
             ]
           },
-          "HelloLambdaVersionl1ay4IUF6VGGdB68mssWdFqaulQ2uQHzlsFH5uuQ": {
+          "CreateSubscriptionLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": {
+                  "Ref": "ServerlessDeploymentBucket"
+                },
+                "S3Key": "serverless/serverless-stripe-integration/dev/1642590998336-2022-01-19T11:16:38.336Z/createSubscription.zip"
+              },
+              "Handler": "s_createSubscription.handler",
+              "Runtime": "nodejs14.x",
+              "FunctionName": "serverless-stripe-integration-dev-createSubscription",
+              "MemorySize": 1024,
+              "Timeout": 12,
+              "Environment": {
+                "Variables": {
+                  "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
+                  "NODE_OPTIONS": "--enable-source-maps --stack-trace-limit=1000"
+                }
+              },
+              "Role": {
+                "Fn::GetAtt": [
+                  "IamRoleLambdaExecution",
+                  "Arn"
+                ]
+              }
+            },
+            "DependsOn": [
+              "CreateSubscriptionLogGroup"
+            ]
+          },
+          "HandleSubscriptionLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": {
+                  "Ref": "ServerlessDeploymentBucket"
+                },
+                "S3Key": "serverless/serverless-stripe-integration/dev/1642590998336-2022-01-19T11:16:38.336Z/handleSubscription.zip"
+              },
+              "Handler": "s_handleSubscription.handler",
+              "Runtime": "nodejs14.x",
+              "FunctionName": "serverless-stripe-integration-dev-handleSubscription",
+              "MemorySize": 1024,
+              "Timeout": 12,
+              "Environment": {
+                "Variables": {
+                  "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
+                  "NODE_OPTIONS": "--enable-source-maps --stack-trace-limit=1000"
+                }
+              },
+              "Role": {
+                "Fn::GetAtt": [
+                  "IamRoleLambdaExecution",
+                  "Arn"
+                ]
+              }
+            },
+            "DependsOn": [
+              "HandleSubscriptionLogGroup"
+            ]
+          },
+          "HelloLambdaVersioneGVFZuvGDXOcQBii8Wb318pNvHl1ZsJPYIDyhCop8": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "HelloLambdaFunction"
               },
-              "CodeSha256": "VQ9t3v/wD/7tgnUGTYQeG6PcGLKwdkQKizEKJBwQyn0="
+              "CodeSha256": "FQrVyRb4Ewah4KCPh5sKBa1ink0CUkNRRPnce2zr9A8="
             }
           },
-          "CreateCustomerLambdaVersionwYVhlMqgtvIO1Pd5l5Qt3V9TS9xuW1THsjsFUHuO5c": {
+          "CreateCustomerLambdaVersionvTi1QwnXKmyC52QZi89Pb7Ns1HWohu3fuKqrgdVD9o": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "CreateCustomerLambdaFunction"
               },
-              "CodeSha256": "Ue5boVsS/pRSXIN0tI/9h4QvK6tJD588ZAwKjNNpTZ0="
+              "CodeSha256": "IMDZ8wC2bo5ut4oyvHj+97tQCMsEaFgWuADVYrQkNek="
+            }
+          },
+          "CreateSubscriptionLambdaVersion2cjZTSFjhs0t4ZUjzBHEjI86hhR4IHopJPrP0BRKe4": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "CreateSubscriptionLambdaFunction"
+              },
+              "CodeSha256": "615qGlpkr0wkYErzWj1tl/U+2WMYwXOUCG4W112GnJk="
+            }
+          },
+          "HandleSubscriptionLambdaVersiondbI4XHTDSC4lQG00bGdcxCfNtwBnqkUqbS6ARYSnoC8": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "HandleSubscriptionLambdaFunction"
+              },
+              "CodeSha256": "ex/at2iMh6XBsAGum9/NdGzPaHBOud++y5MIhX43vlY="
             }
           },
           "ApiGatewayRestApi": {
@@ -354,6 +460,36 @@
                 ]
               },
               "PathPart": "createCustomer",
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayResourceCreatesubscription": {
+            "Type": "AWS::ApiGateway::Resource",
+            "Properties": {
+              "ParentId": {
+                "Fn::GetAtt": [
+                  "ApiGatewayRestApi",
+                  "RootResourceId"
+                ]
+              },
+              "PathPart": "createSubscription",
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayResourceHandlesubscription": {
+            "Type": "AWS::ApiGateway::Resource",
+            "Properties": {
+              "ParentId": {
+                "Fn::GetAtt": [
+                  "ApiGatewayRestApi",
+                  "RootResourceId"
+                ]
+              },
+              "PathPart": "handleSubscription",
               "RestApiId": {
                 "Ref": "ApiGatewayRestApi"
               }
@@ -467,6 +603,114 @@
               "CreateCustomerLambdaPermissionApiGateway"
             ]
           },
+          "ApiGatewayMethodCreatesubscriptionPost": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "HttpMethod": "POST",
+              "RequestParameters": {},
+              "ResourceId": {
+                "Ref": "ApiGatewayResourceCreatesubscription"
+              },
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "ApiKeyRequired": false,
+              "AuthorizationType": "NONE",
+              "Integration": {
+                "IntegrationHttpMethod": "POST",
+                "Type": "AWS_PROXY",
+                "Uri": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":apigateway:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":lambda:path/2015-03-31/functions/",
+                      {
+                        "Fn::GetAtt": [
+                          "CreateSubscriptionLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "/invocations"
+                    ]
+                  ]
+                }
+              },
+              "MethodResponses": [],
+              "RequestValidatorId": {
+                "Ref": "ApiGatewayServerlessstripeintegrationRequestValidator"
+              },
+              "RequestModels": {
+                "application/json": {
+                  "Ref": "ApiGatewayMethodCreatesubscriptionPostApplicationJsonModel"
+                }
+              }
+            },
+            "DependsOn": [
+              "CreateSubscriptionLambdaPermissionApiGateway"
+            ]
+          },
+          "ApiGatewayMethodHandlesubscriptionPost": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "HttpMethod": "POST",
+              "RequestParameters": {},
+              "ResourceId": {
+                "Ref": "ApiGatewayResourceHandlesubscription"
+              },
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "ApiKeyRequired": false,
+              "AuthorizationType": "NONE",
+              "Integration": {
+                "IntegrationHttpMethod": "POST",
+                "Type": "AWS_PROXY",
+                "Uri": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":apigateway:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":lambda:path/2015-03-31/functions/",
+                      {
+                        "Fn::GetAtt": [
+                          "HandleSubscriptionLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "/invocations"
+                    ]
+                  ]
+                }
+              },
+              "MethodResponses": [],
+              "RequestValidatorId": {
+                "Ref": "ApiGatewayServerlessstripeintegrationRequestValidator"
+              },
+              "RequestModels": {
+                "application/json": {
+                  "Ref": "ApiGatewayMethodHandlesubscriptionPostApplicationJsonModel"
+                }
+              }
+            },
+            "DependsOn": [
+              "HandleSubscriptionLambdaPermissionApiGateway"
+            ]
+          },
           "ApiGatewayServerlessstripeintegrationRequestValidator": {
             "Type": "AWS::ApiGateway::RequestValidator",
             "Properties": {
@@ -521,7 +765,57 @@
               }
             }
           },
-          "ApiGatewayDeployment1642548819216": {
+          "ApiGatewayMethodCreatesubscriptionPostApplicationJsonModel": {
+            "Type": "AWS::ApiGateway::Model",
+            "Properties": {
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "ContentType": "application/json",
+              "Schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "productPlan": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "email"
+                ]
+              }
+            }
+          },
+          "ApiGatewayMethodHandlesubscriptionPostApplicationJsonModel": {
+            "Type": "AWS::ApiGateway::Model",
+            "Properties": {
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "ContentType": "application/json",
+              "Schema": {
+                "type": "object",
+                "properties": {
+                  "subscriptionID": {
+                    "type": "string"
+                  },
+                  "end": {
+                    "type": "boolean"
+                  }
+                },
+                "required": [
+                  "subscriptionID",
+                  "end"
+                ]
+              }
+            }
+          },
+          "ApiGatewayDeployment1642590991098": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -531,7 +825,9 @@
             },
             "DependsOn": [
               "ApiGatewayMethodHelloPost",
-              "ApiGatewayMethodCreatecustomerPost"
+              "ApiGatewayMethodCreatecustomerPost",
+              "ApiGatewayMethodCreatesubscriptionPost",
+              "ApiGatewayMethodHandlesubscriptionPost"
             ]
           },
           "HelloLambdaPermissionApiGateway": {
@@ -577,6 +873,80 @@
               "FunctionName": {
                 "Fn::GetAtt": [
                   "CreateCustomerLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "Ref": "ApiGatewayRestApi"
+                    },
+                    "/*/*"
+                  ]
+                ]
+              }
+            }
+          },
+          "CreateSubscriptionLambdaPermissionApiGateway": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "CreateSubscriptionLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "Ref": "ApiGatewayRestApi"
+                    },
+                    "/*/*"
+                  ]
+                ]
+              }
+            }
+          },
+          "HandleSubscriptionLambdaPermissionApiGateway": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "HandleSubscriptionLambdaFunction",
                   "Arn"
                 ]
               },
@@ -717,7 +1087,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/serverless-stripe-integration/dev/1642548825471-2022-01-18T23:33:45.471Z/custom-resources.zip"
+                "S3Key": "serverless/serverless-stripe-integration/dev/1642590998336-2022-01-19T11:16:38.336Z/custom-resources.zip"
               },
               "FunctionName": "serverless-stripe-integration-dev-custom-resource-apigw-cw-role",
               "Handler": "apiGatewayCloudWatchRole/handler.handler",
@@ -755,6 +1125,26 @@
               }
             }
           },
+          "CWLSubFilterCreateSubscriptionLogGroupEuWest1": {
+            "Type": "AWS::Logs::SubscriptionFilter",
+            "Properties": {
+              "DestinationArn": "arn:aws:logs:eu-west-1:802587217904:destination:350280e5-98ef-4cc0-abff-4f05f91ed086#Wnrv1K2hHg0xPYXC9b#serverless-stripe-integration#dev",
+              "FilterPattern": "?\"REPORT RequestId: \" ?\"SERVERLESS_ENTERPRISE\"",
+              "LogGroupName": {
+                "Ref": "CreateSubscriptionLogGroup"
+              }
+            }
+          },
+          "CWLSubFilterHandleSubscriptionLogGroupEuWest1": {
+            "Type": "AWS::Logs::SubscriptionFilter",
+            "Properties": {
+              "DestinationArn": "arn:aws:logs:eu-west-1:802587217904:destination:350280e5-98ef-4cc0-abff-4f05f91ed086#Wnrv1K2hHg0xPYXC9b#serverless-stripe-integration#dev",
+              "FilterPattern": "?\"REPORT RequestId: \" ?\"SERVERLESS_ENTERPRISE\"",
+              "LogGroupName": {
+                "Ref": "HandleSubscriptionLogGroup"
+              }
+            }
+          },
           "CWLSubFilterApiGatewayLogGroupEuWest1": {
             "Type": "AWS::Logs::SubscriptionFilter",
             "Properties": {
@@ -789,7 +1179,7 @@
           "HelloLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "HelloLambdaVersionl1ay4IUF6VGGdB68mssWdFqaulQ2uQHzlsFH5uuQ"
+              "Ref": "HelloLambdaVersioneGVFZuvGDXOcQBii8Wb318pNvHl1ZsJPYIDyhCop8"
             },
             "Export": {
               "Name": "sls-serverless-stripe-integration-dev-HelloLambdaFunctionQualifiedArn"
@@ -798,10 +1188,28 @@
           "CreateCustomerLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "CreateCustomerLambdaVersionwYVhlMqgtvIO1Pd5l5Qt3V9TS9xuW1THsjsFUHuO5c"
+              "Ref": "CreateCustomerLambdaVersionvTi1QwnXKmyC52QZi89Pb7Ns1HWohu3fuKqrgdVD9o"
             },
             "Export": {
               "Name": "sls-serverless-stripe-integration-dev-CreateCustomerLambdaFunctionQualifiedArn"
+            }
+          },
+          "CreateSubscriptionLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "CreateSubscriptionLambdaVersion2cjZTSFjhs0t4ZUjzBHEjI86hhR4IHopJPrP0BRKe4"
+            },
+            "Export": {
+              "Name": "sls-serverless-stripe-integration-dev-CreateSubscriptionLambdaFunctionQualifiedArn"
+            }
+          },
+          "HandleSubscriptionLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "HandleSubscriptionLambdaVersiondbI4XHTDSC4lQG00bGdcxCfNtwBnqkUqbS6ARYSnoC8"
+            },
+            "Export": {
+              "Name": "sls-serverless-stripe-integration-dev-HandleSubscriptionLambdaFunctionQualifiedArn"
             }
           },
           "ServiceEndpoint": {
@@ -967,7 +1375,7 @@
         "timeout": 12,
         "runtime": "nodejs14.x",
         "vpc": {},
-        "versionLogicalId": "HelloLambdaVersionl1ay4IUF6VGGdB68mssWdFqaulQ2uQHzlsFH5uuQ"
+        "versionLogicalId": "HelloLambdaVersioneGVFZuvGDXOcQBii8Wb318pNvHl1ZsJPYIDyhCop8"
       },
       "createCustomer": {
         "handler": "s_createCustomer.handler",
@@ -995,7 +1403,63 @@
         "timeout": 12,
         "runtime": "nodejs14.x",
         "vpc": {},
-        "versionLogicalId": "CreateCustomerLambdaVersionwYVhlMqgtvIO1Pd5l5Qt3V9TS9xuW1THsjsFUHuO5c"
+        "versionLogicalId": "CreateCustomerLambdaVersionvTi1QwnXKmyC52QZi89Pb7Ns1HWohu3fuKqrgdVD9o"
+      },
+      "createSubscription": {
+        "handler": "s_createSubscription.handler",
+        "events": [
+          {
+            "http": {
+              "method": "post",
+              "path": "createSubscription",
+              "request": {
+                "schemas": {
+                  "application/json": {
+                    "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"ApiGatewayMethodCreatesubscriptionPostApplicationJsonModel\"][\"Properties\"][\"Schema\"]"
+                  }
+                }
+              },
+              "integration": "AWS_PROXY"
+            }
+          }
+        ],
+        "name": "serverless-stripe-integration-dev-createSubscription",
+        "package": {
+          "artifact": "/Users/jamesobrien/Documents/dev/conclave/stripe/.serverless/createSubscription.zip"
+        },
+        "memory": 1024,
+        "timeout": 12,
+        "runtime": "nodejs14.x",
+        "vpc": {},
+        "versionLogicalId": "CreateSubscriptionLambdaVersion2cjZTSFjhs0t4ZUjzBHEjI86hhR4IHopJPrP0BRKe4"
+      },
+      "handleSubscription": {
+        "handler": "s_handleSubscription.handler",
+        "events": [
+          {
+            "http": {
+              "method": "post",
+              "path": "handleSubscription",
+              "request": {
+                "schemas": {
+                  "application/json": {
+                    "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"ApiGatewayMethodHandlesubscriptionPostApplicationJsonModel\"][\"Properties\"][\"Schema\"]"
+                  }
+                }
+              },
+              "integration": "AWS_PROXY"
+            }
+          }
+        ],
+        "name": "serverless-stripe-integration-dev-handleSubscription",
+        "package": {
+          "artifact": "/Users/jamesobrien/Documents/dev/conclave/stripe/.serverless/handleSubscription.zip"
+        },
+        "memory": 1024,
+        "timeout": 12,
+        "runtime": "nodejs14.x",
+        "vpc": {},
+        "versionLogicalId": "HandleSubscriptionLambdaVersiondbI4XHTDSC4lQG00bGdcxCfNtwBnqkUqbS6ARYSnoC8"
       }
     },
     "configValidationMode": "warn",
@@ -1033,7 +1497,7 @@
   },
   "package": {
     "individually": true,
-    "artifactDirectoryName": "serverless/serverless-stripe-integration/dev/1642548825471-2022-01-18T23:33:45.471Z",
+    "artifactDirectoryName": "serverless/serverless-stripe-integration/dev/1642590998336-2022-01-19T11:16:38.336Z",
     "artifact": ""
   }
 }
