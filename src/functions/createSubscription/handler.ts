@@ -1,17 +1,19 @@
-import type { ValidatedEventAPIGatewayProxyEvent } from "@libs/apiGateway";
-import { formatJSONResponse } from "@libs/apiGateway";
-import { middyfy } from "@libs/lambda";
 import { APIGatewayProxyEvent } from "aws-lambda";
 import Stripe from "stripe";
-const stripe = new Stripe("enter key" || "", {
-	apiVersion: "2020-08-27",
-});
+const stripe = new Stripe(
+	"sk_test_51KFG8gFe3afnmlSvPXBZNTmDiggMyoTiKpU5G0CGgSF8jrz9ZsZ1JrAfO75ZBzDB1Cgp4MJELRL79y6NYCfghjda00bs7mll5N" ||
+		"",
+	{
+		apiVersion: "2020-08-27",
+	}
+);
 interface IBody {
 	email: string;
 	username: string;
+	productPlan: string;
 }
 
-const createCustomer = async (
+const createSubscription = async (
 	event: APIGatewayProxyEvent,
 	context: any,
 	callback: (err: Error | null, data: any) => void
@@ -21,11 +23,11 @@ const createCustomer = async (
 		return;
 	}
 	const body = JSON.parse(event.body) as IBody;
-	const { email, username } = body;
-	if (!email || !username) {
+	const { email, username, productPlan } = body;
+	if (!email || !username || !productPlan) {
 		callback(null, {
 			statusCode: 400,
-			body: "Missing email or username",
+			body: "Missing email or username or product id",
 		});
 		return;
 	}
@@ -35,13 +37,20 @@ const createCustomer = async (
 			email,
 			name: username,
 		});
+		const customerId = customer.id;
+
+		const subscription = await stripe.subscriptions.create({
+			customer: customerId,
+			items: [{ plan: productPlan }],
+		});
+
 		callback(null, {
 			statusCode: 200,
-			body: JSON.stringify(customer),
+			body: JSON.stringify(subscription),
 		});
 	} catch (error) {
 		callback(error, "error");
 	}
 };
 
-export const main = createCustomer;
+export const main = createSubscription;
