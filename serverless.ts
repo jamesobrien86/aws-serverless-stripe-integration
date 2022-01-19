@@ -5,6 +5,8 @@ import createCustomer from "@functions/createCustomer";
 import createSubscription from "@functions/createSubscription";
 import handleSubscription from "@functions/handleSubscription";
 import getSubscription from "@functions/getSubscription";
+import getPaymentType from "@functions/getPaymentType";
+import updatePaymentMethod from "@functions/updatePaymentMethod";
 
 const serverlessConfiguration: AWS = {
 	service: "serverless-stripe-integration",
@@ -35,6 +37,8 @@ const serverlessConfiguration: AWS = {
 		createSubscription,
 		handleSubscription,
 		getSubscription,
+		getPaymentType,
+		updatePaymentMethod,
 	},
 	package: { individually: true },
 	custom: {
