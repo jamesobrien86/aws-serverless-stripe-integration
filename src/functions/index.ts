@@ -5,3 +5,5 @@ export { default as handleSubscription } from "./handleSubscription";
 export { default as getSubscription } from "./getSubscription";
 export { default as getPaymentType } from "./getPaymentType";
 export { default as updatePaymentMethod } from "./updatePaymentMethod";
+export { default as getCustomerPortal } from "./getCustomerPortal";
+export { default as getProductsList } from "./getProductsList";

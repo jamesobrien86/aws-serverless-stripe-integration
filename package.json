@@ -13,6 +13,7 @@
 	"dependencies": {
 		"@middy/core": "^2.5.3",
 		"@middy/http-json-body-parser": "^2.5.3",
+		"axios": "^0.25.0",
 		"serverless-offline": "^8.3.1",
 		"stripe": "^8.197.0"
 	},

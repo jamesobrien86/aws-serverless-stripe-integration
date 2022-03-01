@@ -1,24 +1,23 @@
+import { stripe } from "@libs/stripe";
 import { APIGatewayProxyEvent } from "aws-lambda";
-import { stripe } from "../../libs/stripe";
 
 interface IBody {
 	subscriptionID: string;
-	end: boolean;
 }
 
-const handleSubscription = async (
+const getSubscription = async (
 	event: APIGatewayProxyEvent,
-	context: any,
-	callback: (err: Error | null, data: any) => void
+	context,
+	callback
 ) => {
 	if (!event.body) {
-		callback(Error("Invalid body"), "Error");
+		callback(Error("Invalid Body"), "Error");
+		return;
 	}
-
 	const body = JSON.parse(event.body) as IBody;
-	const { subscriptionID, end } = body;
+	const { subscriptionID } = body;
 
-	if (!subscriptionID || end === undefined) {
+	if (!subscriptionID) {
 		callback(null, {
 			statusCode: 400,
 			body: "Missing subscription id",
@@ -27,9 +26,7 @@ const handleSubscription = async (
 	}
 
 	try {
-		const subscription = await stripe.subscriptions.update(subscriptionID, {
-			cancel_at_period_end: end,
-		});
+		const subscription = await stripe.subscriptions.retrieve(subscriptionID);
 
 		callback(null, {
 			headers: {
@@ -45,4 +42,4 @@ const handleSubscription = async (
 	}
 };
 
-export const main = handleSubscription;
+export const main = getSubscription;

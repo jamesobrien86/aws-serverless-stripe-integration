@@ -2,31 +2,27 @@ import { stripe } from "@libs/stripe";
 import { APIGatewayProxyEvent } from "aws-lambda";
 
 interface IBody {
-	paymentMethodID: string;
+	customerID: string;
 }
 
-const getPaymentType = async (
-	event: APIGatewayProxyEvent,
-	context,
-	callback
-) => {
+const getCustomer = async (event: APIGatewayProxyEvent, context, callback) => {
 	if (!event.body) {
 		callback(Error("Invalid Body"), "Error");
 		return;
 	}
 	const body = JSON.parse(event.body) as IBody;
-	const { paymentMethodID } = body;
+	const { customerID } = body;
 
-	if (!paymentMethodID) {
+	if (!customerID) {
 		callback(null, {
 			statusCode: 400,
-			body: "Invalid payment method",
+			body: "Missing subscription id",
 		});
 		return;
 	}
 
 	try {
-		const paymentMethod = await stripe.subscriptions.retrieve(paymentMethodID);
+		const customer = await stripe.customers.retrieve(customerID);
 
 		callback(null, {
 			headers: {
@@ -35,11 +31,11 @@ const getPaymentType = async (
 				"Access-Control-Allow-Credentials": true,
 			},
 			statusCode: 200,
-			body: JSON.stringify(paymentMethod),
+			body: JSON.stringify(customer),
 		});
 	} catch (error) {
 		callback(error, "Error");
 	}
 };
 
-export const main = getPaymentType;
+export const main = getCustomer;

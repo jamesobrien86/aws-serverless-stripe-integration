@@ -101,6 +101,42 @@
         "LogGroupName": "/aws/lambda/serverless-stripe-integration-dev-getSubscription"
       }
     },
+    "GetPaymentTypeLogGroup": {
+      "Type": "AWS::Logs::LogGroup",
+      "Properties": {
+        "LogGroupName": "/aws/lambda/serverless-stripe-integration-dev-getPaymentType"
+      }
+    },
+    "UpdatePaymentMethodLogGroup": {
+      "Type": "AWS::Logs::LogGroup",
+      "Properties": {
+        "LogGroupName": "/aws/lambda/serverless-stripe-integration-dev-updatePaymentMethod"
+      }
+    },
+    "GetCustomerPortalLogGroup": {
+      "Type": "AWS::Logs::LogGroup",
+      "Properties": {
+        "LogGroupName": "/aws/lambda/serverless-stripe-integration-dev-getCustomerPortal"
+      }
+    },
+    "GetProductsListLogGroup": {
+      "Type": "AWS::Logs::LogGroup",
+      "Properties": {
+        "LogGroupName": "/aws/lambda/serverless-stripe-integration-dev-getProductsList"
+      }
+    },
+    "GetCustomerLogGroup": {
+      "Type": "AWS::Logs::LogGroup",
+      "Properties": {
+        "LogGroupName": "/aws/lambda/serverless-stripe-integration-dev-getCustomer"
+      }
+    },
+    "UpdateCustomerLogGroup": {
+      "Type": "AWS::Logs::LogGroup",
+      "Properties": {
+        "LogGroupName": "/aws/lambda/serverless-stripe-integration-dev-updateCustomer"
+      }
+    },
     "IamRoleLambdaExecution": {
       "Type": "AWS::IAM::Role",
       "Properties": {
@@ -239,6 +275,42 @@
                         "GetSubscriptionLogGroup",
                         "Arn"
                       ]
+                    },
+                    {
+                      "Fn::GetAtt": [
+                        "GetPaymentTypeLogGroup",
+                        "Arn"
+                      ]
+                    },
+                    {
+                      "Fn::GetAtt": [
+                        "UpdatePaymentMethodLogGroup",
+                        "Arn"
+                      ]
+                    },
+                    {
+                      "Fn::GetAtt": [
+                        "GetCustomerPortalLogGroup",
+                        "Arn"
+                      ]
+                    },
+                    {
+                      "Fn::GetAtt": [
+                        "GetProductsListLogGroup",
+                        "Arn"
+                      ]
+                    },
+                    {
+                      "Fn::GetAtt": [
+                        "GetCustomerLogGroup",
+                        "Arn"
+                      ]
+                    },
+                    {
+                      "Fn::GetAtt": [
+                        "UpdateCustomerLogGroup",
+                        "Arn"
+                      ]
                     }
                   ]
                 }
@@ -255,7 +327,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/serverless-stripe-integration/dev/1642594146538-2022-01-19T12:09:06.538Z/hello.zip"
+          "S3Key": "serverless/serverless-stripe-integration/dev/1644488487914-2022-02-10T10:21:27.914Z/hello.zip"
         },
         "Handler": "s_hello.handler",
         "Runtime": "nodejs14.x",
@@ -286,7 +358,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/serverless-stripe-integration/dev/1642594146538-2022-01-19T12:09:06.538Z/createCustomer.zip"
+          "S3Key": "serverless/serverless-stripe-integration/dev/1644488487914-2022-02-10T10:21:27.914Z/createCustomer.zip"
         },
         "Handler": "s_createCustomer.handler",
         "Runtime": "nodejs14.x",
@@ -317,7 +389,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/serverless-stripe-integration/dev/1642594146538-2022-01-19T12:09:06.538Z/createSubscription.zip"
+          "S3Key": "serverless/serverless-stripe-integration/dev/1644488487914-2022-02-10T10:21:27.914Z/createSubscription.zip"
         },
         "Handler": "s_createSubscription.handler",
         "Runtime": "nodejs14.x",
@@ -348,7 +420,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/serverless-stripe-integration/dev/1642594146538-2022-01-19T12:09:06.538Z/handleSubscription.zip"
+          "S3Key": "serverless/serverless-stripe-integration/dev/1644488487914-2022-02-10T10:21:27.914Z/handleSubscription.zip"
         },
         "Handler": "s_handleSubscription.handler",
         "Runtime": "nodejs14.x",
@@ -379,7 +451,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/serverless-stripe-integration/dev/1642594146538-2022-01-19T12:09:06.538Z/getSubscription.zip"
+          "S3Key": "serverless/serverless-stripe-integration/dev/1644488487914-2022-02-10T10:21:27.914Z/getSubscription.zip"
         },
         "Handler": "s_getSubscription.handler",
         "Runtime": "nodejs14.x",
@@ -403,54 +475,300 @@
         "GetSubscriptionLogGroup"
       ]
     },
-    "HelloLambdaVersion2l486ntete2ZrNLqQ2hZT6TUjE5mII4NK8v3jFO9zhI": {
+    "GetPaymentTypeLambdaFunction": {
+      "Type": "AWS::Lambda::Function",
+      "Properties": {
+        "Code": {
+          "S3Bucket": {
+            "Ref": "ServerlessDeploymentBucket"
+          },
+          "S3Key": "serverless/serverless-stripe-integration/dev/1644488487914-2022-02-10T10:21:27.914Z/getPaymentType.zip"
+        },
+        "Handler": "s_getPaymentType.handler",
+        "Runtime": "nodejs14.x",
+        "FunctionName": "serverless-stripe-integration-dev-getPaymentType",
+        "MemorySize": 1024,
+        "Timeout": 12,
+        "Environment": {
+          "Variables": {
+            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
+            "NODE_OPTIONS": "--enable-source-maps --stack-trace-limit=1000"
+          }
+        },
+        "Role": {
+          "Fn::GetAtt": [
+            "IamRoleLambdaExecution",
+            "Arn"
+          ]
+        }
+      },
+      "DependsOn": [
+        "GetPaymentTypeLogGroup"
+      ]
+    },
+    "UpdatePaymentMethodLambdaFunction": {
+      "Type": "AWS::Lambda::Function",
+      "Properties": {
+        "Code": {
+          "S3Bucket": {
+            "Ref": "ServerlessDeploymentBucket"
+          },
+          "S3Key": "serverless/serverless-stripe-integration/dev/1644488487914-2022-02-10T10:21:27.914Z/updatePaymentMethod.zip"
+        },
+        "Handler": "s_updatePaymentMethod.handler",
+        "Runtime": "nodejs14.x",
+        "FunctionName": "serverless-stripe-integration-dev-updatePaymentMethod",
+        "MemorySize": 1024,
+        "Timeout": 12,
+        "Environment": {
+          "Variables": {
+            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
+            "NODE_OPTIONS": "--enable-source-maps --stack-trace-limit=1000"
+          }
+        },
+        "Role": {
+          "Fn::GetAtt": [
+            "IamRoleLambdaExecution",
+            "Arn"
+          ]
+        }
+      },
+      "DependsOn": [
+        "UpdatePaymentMethodLogGroup"
+      ]
+    },
+    "GetCustomerPortalLambdaFunction": {
+      "Type": "AWS::Lambda::Function",
+      "Properties": {
+        "Code": {
+          "S3Bucket": {
+            "Ref": "ServerlessDeploymentBucket"
+          },
+          "S3Key": "serverless/serverless-stripe-integration/dev/1644488487914-2022-02-10T10:21:27.914Z/getCustomerPortal.zip"
+        },
+        "Handler": "s_getCustomerPortal.handler",
+        "Runtime": "nodejs14.x",
+        "FunctionName": "serverless-stripe-integration-dev-getCustomerPortal",
+        "MemorySize": 1024,
+        "Timeout": 12,
+        "Environment": {
+          "Variables": {
+            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
+            "NODE_OPTIONS": "--enable-source-maps --stack-trace-limit=1000"
+          }
+        },
+        "Role": {
+          "Fn::GetAtt": [
+            "IamRoleLambdaExecution",
+            "Arn"
+          ]
+        }
+      },
+      "DependsOn": [
+        "GetCustomerPortalLogGroup"
+      ]
+    },
+    "GetProductsListLambdaFunction": {
+      "Type": "AWS::Lambda::Function",
+      "Properties": {
+        "Code": {
+          "S3Bucket": {
+            "Ref": "ServerlessDeploymentBucket"
+          },
+          "S3Key": "serverless/serverless-stripe-integration/dev/1644488487914-2022-02-10T10:21:27.914Z/getProductsList.zip"
+        },
+        "Handler": "s_getProductsList.handler",
+        "Runtime": "nodejs14.x",
+        "FunctionName": "serverless-stripe-integration-dev-getProductsList",
+        "MemorySize": 1024,
+        "Timeout": 12,
+        "Environment": {
+          "Variables": {
+            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
+            "NODE_OPTIONS": "--enable-source-maps --stack-trace-limit=1000"
+          }
+        },
+        "Role": {
+          "Fn::GetAtt": [
+            "IamRoleLambdaExecution",
+            "Arn"
+          ]
+        }
+      },
+      "DependsOn": [
+        "GetProductsListLogGroup"
+      ]
+    },
+    "GetCustomerLambdaFunction": {
+      "Type": "AWS::Lambda::Function",
+      "Properties": {
+        "Code": {
+          "S3Bucket": {
+            "Ref": "ServerlessDeploymentBucket"
+          },
+          "S3Key": "serverless/serverless-stripe-integration/dev/1644488487914-2022-02-10T10:21:27.914Z/getCustomer.zip"
+        },
+        "Handler": "s_getCustomer.handler",
+        "Runtime": "nodejs14.x",
+        "FunctionName": "serverless-stripe-integration-dev-getCustomer",
+        "MemorySize": 1024,
+        "Timeout": 12,
+        "Environment": {
+          "Variables": {
+            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
+            "NODE_OPTIONS": "--enable-source-maps --stack-trace-limit=1000"
+          }
+        },
+        "Role": {
+          "Fn::GetAtt": [
+            "IamRoleLambdaExecution",
+            "Arn"
+          ]
+        }
+      },
+      "DependsOn": [
+        "GetCustomerLogGroup"
+      ]
+    },
+    "UpdateCustomerLambdaFunction": {
+      "Type": "AWS::Lambda::Function",
+      "Properties": {
+        "Code": {
+          "S3Bucket": {
+            "Ref": "ServerlessDeploymentBucket"
+          },
+          "S3Key": "serverless/serverless-stripe-integration/dev/1644488487914-2022-02-10T10:21:27.914Z/updateCustomer.zip"
+        },
+        "Handler": "s_updateCustomer.handler",
+        "Runtime": "nodejs14.x",
+        "FunctionName": "serverless-stripe-integration-dev-updateCustomer",
+        "MemorySize": 1024,
+        "Timeout": 12,
+        "Environment": {
+          "Variables": {
+            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
+            "NODE_OPTIONS": "--enable-source-maps --stack-trace-limit=1000"
+          }
+        },
+        "Role": {
+          "Fn::GetAtt": [
+            "IamRoleLambdaExecution",
+            "Arn"
+          ]
+        }
+      },
+      "DependsOn": [
+        "UpdateCustomerLogGroup"
+      ]
+    },
+    "HelloLambdaVersion8fBNeGqcycnrwV7Ik60nq6bns8znCAUsgXbGpRr4": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "HelloLambdaFunction"
         },
-        "CodeSha256": "mCJ1jtMIxWBXZ7W2W/2effuYrQzyp56/QWCdEe9m5S8="
+        "CodeSha256": "OdHKfh6nNEFAdhBvlEdtSxDvOr4sdue76ad/nMDTzho="
       }
     },
-    "CreateCustomerLambdaVersionOY9WEBkG8PgS5NnivkuaEj5Tgh1oYXBqy43BpdTMc": {
+    "CreateCustomerLambdaVersionkK2yiPzayVYMrzkryLhAXTkvyYXKF0jm8kBoeUYAo": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "CreateCustomerLambdaFunction"
         },
-        "CodeSha256": "illd/WEtuxXOt6mJi3fGQz21KLL5OsjYBz7kvA9xHh0="
+        "CodeSha256": "Z58o/bi3XXzAskjAZuaehUEohyHm49BjP6tbYctfuc8="
       }
     },
-    "CreateSubscriptionLambdaVersionDz8obOWFgSQK1HMTFmp2TBD0EZ5IrnTPhdtrrEm8HlI": {
+    "CreateSubscriptionLambdaVersionDbNxUJf9ZlpXziWHBmDEQj0frCve40IsegG665dII8": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "CreateSubscriptionLambdaFunction"
         },
-        "CodeSha256": "NJ69qeB8PMvWFvQovmFyQbysb8MGqWtNA7mX+HXDwYI="
+        "CodeSha256": "wC6DpY0c0l8V9MHKLqtryMZcp4jebXQgrwyVpJk1r0A="
       }
     },
-    "HandleSubscriptionLambdaVersionEQS4udHm3N4yPaEzdx8tolkLvYzI6j9nJuSJbfpr1vg": {
+    "GetPaymentTypeLambdaVersionnD1PamKTWjxLdfsmBzvBTc14tFMmZqNaIXuRfxXk": {
+      "Type": "AWS::Lambda::Version",
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "FunctionName": {
+          "Ref": "GetPaymentTypeLambdaFunction"
+        },
+        "CodeSha256": "sB/NePjFnjLNZ6QiwjNEtUPOS9JTffc/sCWhtIojIw4="
+      }
+    },
+    "HandleSubscriptionLambdaVersionXOQKPlGdP6toubtGBfphPTWhDgy4xqNpjLGmZ3ihML4": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "HandleSubscriptionLambdaFunction"
         },
-        "CodeSha256": "RsOV5BOIt9/5bM2C9qcZEvpAM/6GXb1My2JSZSwlYQ8="
+        "CodeSha256": "FjZKwQgoQ6mQVvey650BvjF0OX4i13YWENnYiNpV9NY="
       }
     },
-    "GetSubscriptionLambdaVersion5ttkY72vPzjjiWAzsEz7cc84Soc70NDsy9FLJw5Vb68": {
+    "GetSubscriptionLambdaVersionmnv8EIbCCDdmIBYf0huextWixwwaijCvdorC6lT3z8": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "GetSubscriptionLambdaFunction"
         },
-        "CodeSha256": "oWYfoCDof7WRMJqfQAhb9vOCRB3kzzHP1jLW5xyPb1M="
+        "CodeSha256": "C/MLpnqHq2p68bGRTTjw9SB1d7vry8ipyQM4GvAAWww="
+      }
+    },
+    "UpdatePaymentMethodLambdaVersionMMMhNQhGuJ0YuJasFIzqDiqthZNVCGNxm7JONEVTE": {
+      "Type": "AWS::Lambda::Version",
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "FunctionName": {
+          "Ref": "UpdatePaymentMethodLambdaFunction"
+        },
+        "CodeSha256": "CGRn5xawdbbSPkmN2Y0tzBWz+4avFeWb0ApRt+YarJs="
+      }
+    },
+    "GetCustomerPortalLambdaVersionCns2ucchqv9c6RqRdxlrRMkA8y0UjbkTTPyUwjmqCk": {
+      "Type": "AWS::Lambda::Version",
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "FunctionName": {
+          "Ref": "GetCustomerPortalLambdaFunction"
+        },
+        "CodeSha256": "Imyq7YNbuspPBwKmgt9UR3KYy0anKyXBl6JhEBY1LLA="
+      }
+    },
+    "GetProductsListLambdaVersionULlafdIgKO86kVldtDBmKY5rxPTWNq9JZ5brku930": {
+      "Type": "AWS::Lambda::Version",
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "FunctionName": {
+          "Ref": "GetProductsListLambdaFunction"
+        },
+        "CodeSha256": "6t03DJCMRQUHv9r2BCm4kN7bN5pI/f/LTnB3g6GeCDc="
+      }
+    },
+    "GetCustomerLambdaVersionvqn5vQTcjVOVY3YVAO93XB0EQeSPCPMjVSTIiu1SWE": {
+      "Type": "AWS::Lambda::Version",
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "FunctionName": {
+          "Ref": "GetCustomerLambdaFunction"
+        },
+        "CodeSha256": "JtGrxeMSTK0z8LlOR9l3a2IGeBjb46r2vrh/n7h1Vps="
+      }
+    },
+    "UpdateCustomerLambdaVersionmtQGcdusfXXzuN6PyhuNlsyrx8XYyZb3APUxUDXXNg": {
+      "Type": "AWS::Lambda::Version",
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "FunctionName": {
+          "Ref": "UpdateCustomerLambdaFunction"
+        },
+        "CodeSha256": "OLeRwW1EVb6rcqb6oznG/0zn7hoGkw42zk9kOgDxSzM="
       }
     },
     "ApiGatewayRestApi": {
@@ -536,6 +854,96 @@
           ]
         },
         "PathPart": "getSubscription",
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      }
+    },
+    "ApiGatewayResourceGetpaymenttype": {
+      "Type": "AWS::ApiGateway::Resource",
+      "Properties": {
+        "ParentId": {
+          "Fn::GetAtt": [
+            "ApiGatewayRestApi",
+            "RootResourceId"
+          ]
+        },
+        "PathPart": "getPaymentType",
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      }
+    },
+    "ApiGatewayResourceUpdatepaymentmethod": {
+      "Type": "AWS::ApiGateway::Resource",
+      "Properties": {
+        "ParentId": {
+          "Fn::GetAtt": [
+            "ApiGatewayRestApi",
+            "RootResourceId"
+          ]
+        },
+        "PathPart": "updatePaymentMethod",
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      }
+    },
+    "ApiGatewayResourceGetcustomerportal": {
+      "Type": "AWS::ApiGateway::Resource",
+      "Properties": {
+        "ParentId": {
+          "Fn::GetAtt": [
+            "ApiGatewayRestApi",
+            "RootResourceId"
+          ]
+        },
+        "PathPart": "getCustomerPortal",
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      }
+    },
+    "ApiGatewayResourceGetproductslist": {
+      "Type": "AWS::ApiGateway::Resource",
+      "Properties": {
+        "ParentId": {
+          "Fn::GetAtt": [
+            "ApiGatewayRestApi",
+            "RootResourceId"
+          ]
+        },
+        "PathPart": "getProductsList",
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      }
+    },
+    "ApiGatewayResourceGetcustomer": {
+      "Type": "AWS::ApiGateway::Resource",
+      "Properties": {
+        "ParentId": {
+          "Fn::GetAtt": [
+            "ApiGatewayRestApi",
+            "RootResourceId"
+          ]
+        },
+        "PathPart": "getCustomer",
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      }
+    },
+    "ApiGatewayResourceUpdatecustomer": {
+      "Type": "AWS::ApiGateway::Resource",
+      "Properties": {
+        "ParentId": {
+          "Fn::GetAtt": [
+            "ApiGatewayRestApi",
+            "RootResourceId"
+          ]
+        },
+        "PathPart": "updateCustomer",
         "RestApiId": {
           "Ref": "ApiGatewayRestApi"
         }
@@ -811,6 +1219,330 @@
         "GetSubscriptionLambdaPermissionApiGateway"
       ]
     },
+    "ApiGatewayMethodGetpaymenttypePost": {
+      "Type": "AWS::ApiGateway::Method",
+      "Properties": {
+        "HttpMethod": "POST",
+        "RequestParameters": {},
+        "ResourceId": {
+          "Ref": "ApiGatewayResourceGetpaymenttype"
+        },
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        },
+        "ApiKeyRequired": false,
+        "AuthorizationType": "NONE",
+        "Integration": {
+          "IntegrationHttpMethod": "POST",
+          "Type": "AWS_PROXY",
+          "Uri": {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition"
+                },
+                ":apigateway:",
+                {
+                  "Ref": "AWS::Region"
+                },
+                ":lambda:path/2015-03-31/functions/",
+                {
+                  "Fn::GetAtt": [
+                    "GetPaymentTypeLambdaFunction",
+                    "Arn"
+                  ]
+                },
+                "/invocations"
+              ]
+            ]
+          }
+        },
+        "MethodResponses": [],
+        "RequestValidatorId": {
+          "Ref": "ApiGatewayServerlessstripeintegrationRequestValidator"
+        },
+        "RequestModels": {
+          "application/json": {
+            "Ref": "ApiGatewayMethodGetpaymenttypePostApplicationJsonModel"
+          }
+        }
+      },
+      "DependsOn": [
+        "GetPaymentTypeLambdaPermissionApiGateway"
+      ]
+    },
+    "ApiGatewayMethodUpdatepaymentmethodPost": {
+      "Type": "AWS::ApiGateway::Method",
+      "Properties": {
+        "HttpMethod": "POST",
+        "RequestParameters": {},
+        "ResourceId": {
+          "Ref": "ApiGatewayResourceUpdatepaymentmethod"
+        },
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        },
+        "ApiKeyRequired": false,
+        "AuthorizationType": "NONE",
+        "Integration": {
+          "IntegrationHttpMethod": "POST",
+          "Type": "AWS_PROXY",
+          "Uri": {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition"
+                },
+                ":apigateway:",
+                {
+                  "Ref": "AWS::Region"
+                },
+                ":lambda:path/2015-03-31/functions/",
+                {
+                  "Fn::GetAtt": [
+                    "UpdatePaymentMethodLambdaFunction",
+                    "Arn"
+                  ]
+                },
+                "/invocations"
+              ]
+            ]
+          }
+        },
+        "MethodResponses": [],
+        "RequestValidatorId": {
+          "Ref": "ApiGatewayServerlessstripeintegrationRequestValidator"
+        },
+        "RequestModels": {
+          "application/json": {
+            "Ref": "ApiGatewayMethodUpdatepaymentmethodPostApplicationJsonModel"
+          }
+        }
+      },
+      "DependsOn": [
+        "UpdatePaymentMethodLambdaPermissionApiGateway"
+      ]
+    },
+    "ApiGatewayMethodGetcustomerportalPost": {
+      "Type": "AWS::ApiGateway::Method",
+      "Properties": {
+        "HttpMethod": "POST",
+        "RequestParameters": {},
+        "ResourceId": {
+          "Ref": "ApiGatewayResourceGetcustomerportal"
+        },
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        },
+        "ApiKeyRequired": false,
+        "AuthorizationType": "NONE",
+        "Integration": {
+          "IntegrationHttpMethod": "POST",
+          "Type": "AWS_PROXY",
+          "Uri": {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition"
+                },
+                ":apigateway:",
+                {
+                  "Ref": "AWS::Region"
+                },
+                ":lambda:path/2015-03-31/functions/",
+                {
+                  "Fn::GetAtt": [
+                    "GetCustomerPortalLambdaFunction",
+                    "Arn"
+                  ]
+                },
+                "/invocations"
+              ]
+            ]
+          }
+        },
+        "MethodResponses": [],
+        "RequestValidatorId": {
+          "Ref": "ApiGatewayServerlessstripeintegrationRequestValidator"
+        },
+        "RequestModels": {
+          "application/json": {
+            "Ref": "ApiGatewayMethodGetcustomerportalPostApplicationJsonModel"
+          }
+        }
+      },
+      "DependsOn": [
+        "GetCustomerPortalLambdaPermissionApiGateway"
+      ]
+    },
+    "ApiGatewayMethodGetproductslistGet": {
+      "Type": "AWS::ApiGateway::Method",
+      "Properties": {
+        "HttpMethod": "GET",
+        "RequestParameters": {},
+        "ResourceId": {
+          "Ref": "ApiGatewayResourceGetproductslist"
+        },
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        },
+        "ApiKeyRequired": false,
+        "AuthorizationType": "NONE",
+        "Integration": {
+          "IntegrationHttpMethod": "POST",
+          "Type": "AWS_PROXY",
+          "Uri": {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition"
+                },
+                ":apigateway:",
+                {
+                  "Ref": "AWS::Region"
+                },
+                ":lambda:path/2015-03-31/functions/",
+                {
+                  "Fn::GetAtt": [
+                    "GetProductsListLambdaFunction",
+                    "Arn"
+                  ]
+                },
+                "/invocations"
+              ]
+            ]
+          }
+        },
+        "MethodResponses": [],
+        "RequestValidatorId": {
+          "Ref": "ApiGatewayServerlessstripeintegrationRequestValidator"
+        },
+        "RequestModels": {
+          "application/json": {
+            "Ref": "ApiGatewayMethodGetproductslistGetApplicationJsonModel"
+          }
+        }
+      },
+      "DependsOn": [
+        "GetProductsListLambdaPermissionApiGateway"
+      ]
+    },
+    "ApiGatewayMethodGetcustomerPost": {
+      "Type": "AWS::ApiGateway::Method",
+      "Properties": {
+        "HttpMethod": "POST",
+        "RequestParameters": {},
+        "ResourceId": {
+          "Ref": "ApiGatewayResourceGetcustomer"
+        },
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        },
+        "ApiKeyRequired": false,
+        "AuthorizationType": "NONE",
+        "Integration": {
+          "IntegrationHttpMethod": "POST",
+          "Type": "AWS_PROXY",
+          "Uri": {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition"
+                },
+                ":apigateway:",
+                {
+                  "Ref": "AWS::Region"
+                },
+                ":lambda:path/2015-03-31/functions/",
+                {
+                  "Fn::GetAtt": [
+                    "GetCustomerLambdaFunction",
+                    "Arn"
+                  ]
+                },
+                "/invocations"
+              ]
+            ]
+          }
+        },
+        "MethodResponses": [],
+        "RequestValidatorId": {
+          "Ref": "ApiGatewayServerlessstripeintegrationRequestValidator"
+        },
+        "RequestModels": {
+          "application/json": {
+            "Ref": "ApiGatewayMethodGetcustomerPostApplicationJsonModel"
+          }
+        }
+      },
+      "DependsOn": [
+        "GetCustomerLambdaPermissionApiGateway"
+      ]
+    },
+    "ApiGatewayMethodUpdatecustomerPost": {
+      "Type": "AWS::ApiGateway::Method",
+      "Properties": {
+        "HttpMethod": "POST",
+        "RequestParameters": {},
+        "ResourceId": {
+          "Ref": "ApiGatewayResourceUpdatecustomer"
+        },
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        },
+        "ApiKeyRequired": false,
+        "AuthorizationType": "NONE",
+        "Integration": {
+          "IntegrationHttpMethod": "POST",
+          "Type": "AWS_PROXY",
+          "Uri": {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition"
+                },
+                ":apigateway:",
+                {
+                  "Ref": "AWS::Region"
+                },
+                ":lambda:path/2015-03-31/functions/",
+                {
+                  "Fn::GetAtt": [
+                    "UpdateCustomerLambdaFunction",
+                    "Arn"
+                  ]
+                },
+                "/invocations"
+              ]
+            ]
+          }
+        },
+        "MethodResponses": [],
+        "RequestValidatorId": {
+          "Ref": "ApiGatewayServerlessstripeintegrationRequestValidator"
+        },
+        "RequestModels": {
+          "application/json": {
+            "Ref": "ApiGatewayMethodUpdatecustomerPostApplicationJsonModel"
+          }
+        }
+      },
+      "DependsOn": [
+        "UpdateCustomerLambdaPermissionApiGateway"
+      ]
+    },
     "ApiGatewayServerlessstripeintegrationRequestValidator": {
       "Type": "AWS::ApiGateway::RequestValidator",
       "Properties": {
@@ -935,7 +1667,132 @@
         }
       }
     },
-    "ApiGatewayDeployment1642594139589": {
+    "ApiGatewayMethodGetpaymenttypePostApplicationJsonModel": {
+      "Type": "AWS::ApiGateway::Model",
+      "Properties": {
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        },
+        "ContentType": "application/json",
+        "Schema": {
+          "type": "object",
+          "properties": {
+            "paymentMethodID": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "paymentMethodID"
+          ]
+        }
+      }
+    },
+    "ApiGatewayMethodUpdatepaymentmethodPostApplicationJsonModel": {
+      "Type": "AWS::ApiGateway::Model",
+      "Properties": {
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        },
+        "ContentType": "application/json",
+        "Schema": {
+          "type": "object",
+          "properties": {
+            "paymentMethodID": {
+              "type": "string"
+            },
+            "customerID": {
+              "type": "string"
+            },
+            "invoiceID": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "paymentMethodID"
+          ]
+        }
+      }
+    },
+    "ApiGatewayMethodGetcustomerportalPostApplicationJsonModel": {
+      "Type": "AWS::ApiGateway::Model",
+      "Properties": {
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        },
+        "ContentType": "application/json",
+        "Schema": {
+          "type": "object",
+          "properties": {
+            "customer": {
+              "type": "string"
+            },
+            "return_url": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "customer",
+            "return_url"
+          ]
+        }
+      }
+    },
+    "ApiGatewayMethodGetproductslistGetApplicationJsonModel": {
+      "Type": "AWS::ApiGateway::Model",
+      "Properties": {
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        },
+        "ContentType": "application/json",
+        "Schema": {
+          "type": "object",
+          "properties": {
+            "limit": {}
+          }
+        }
+      }
+    },
+    "ApiGatewayMethodGetcustomerPostApplicationJsonModel": {
+      "Type": "AWS::ApiGateway::Model",
+      "Properties": {
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        },
+        "ContentType": "application/json",
+        "Schema": {
+          "type": "object",
+          "properties": {
+            "customerID": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "customerID"
+          ]
+        }
+      }
+    },
+    "ApiGatewayMethodUpdatecustomerPostApplicationJsonModel": {
+      "Type": "AWS::ApiGateway::Model",
+      "Properties": {
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        },
+        "ContentType": "application/json",
+        "Schema": {
+          "type": "object",
+          "properties": {
+            "customerID": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "customerID"
+          ]
+        }
+      }
+    },
+    "ApiGatewayDeployment1644488482055": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
         "RestApiId": {
@@ -948,7 +1805,13 @@
         "ApiGatewayMethodCreatecustomerPost",
         "ApiGatewayMethodCreatesubscriptionPost",
         "ApiGatewayMethodHandlesubscriptionPost",
-        "ApiGatewayMethodGetsubscriptionPost"
+        "ApiGatewayMethodGetsubscriptionPost",
+        "ApiGatewayMethodGetpaymenttypePost",
+        "ApiGatewayMethodUpdatepaymentmethodPost",
+        "ApiGatewayMethodGetcustomerportalPost",
+        "ApiGatewayMethodGetproductslistGet",
+        "ApiGatewayMethodGetcustomerPost",
+        "ApiGatewayMethodUpdatecustomerPost"
       ]
     },
     "HelloLambdaPermissionApiGateway": {
@@ -1136,6 +1999,228 @@
         }
       }
     },
+    "GetPaymentTypeLambdaPermissionApiGateway": {
+      "Type": "AWS::Lambda::Permission",
+      "Properties": {
+        "FunctionName": {
+          "Fn::GetAtt": [
+            "GetPaymentTypeLambdaFunction",
+            "Arn"
+          ]
+        },
+        "Action": "lambda:InvokeFunction",
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": {
+          "Fn::Join": [
+            "",
+            [
+              "arn:",
+              {
+                "Ref": "AWS::Partition"
+              },
+              ":execute-api:",
+              {
+                "Ref": "AWS::Region"
+              },
+              ":",
+              {
+                "Ref": "AWS::AccountId"
+              },
+              ":",
+              {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "/*/*"
+            ]
+          ]
+        }
+      }
+    },
+    "UpdatePaymentMethodLambdaPermissionApiGateway": {
+      "Type": "AWS::Lambda::Permission",
+      "Properties": {
+        "FunctionName": {
+          "Fn::GetAtt": [
+            "UpdatePaymentMethodLambdaFunction",
+            "Arn"
+          ]
+        },
+        "Action": "lambda:InvokeFunction",
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": {
+          "Fn::Join": [
+            "",
+            [
+              "arn:",
+              {
+                "Ref": "AWS::Partition"
+              },
+              ":execute-api:",
+              {
+                "Ref": "AWS::Region"
+              },
+              ":",
+              {
+                "Ref": "AWS::AccountId"
+              },
+              ":",
+              {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "/*/*"
+            ]
+          ]
+        }
+      }
+    },
+    "GetCustomerPortalLambdaPermissionApiGateway": {
+      "Type": "AWS::Lambda::Permission",
+      "Properties": {
+        "FunctionName": {
+          "Fn::GetAtt": [
+            "GetCustomerPortalLambdaFunction",
+            "Arn"
+          ]
+        },
+        "Action": "lambda:InvokeFunction",
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": {
+          "Fn::Join": [
+            "",
+            [
+              "arn:",
+              {
+                "Ref": "AWS::Partition"
+              },
+              ":execute-api:",
+              {
+                "Ref": "AWS::Region"
+              },
+              ":",
+              {
+                "Ref": "AWS::AccountId"
+              },
+              ":",
+              {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "/*/*"
+            ]
+          ]
+        }
+      }
+    },
+    "GetProductsListLambdaPermissionApiGateway": {
+      "Type": "AWS::Lambda::Permission",
+      "Properties": {
+        "FunctionName": {
+          "Fn::GetAtt": [
+            "GetProductsListLambdaFunction",
+            "Arn"
+          ]
+        },
+        "Action": "lambda:InvokeFunction",
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": {
+          "Fn::Join": [
+            "",
+            [
+              "arn:",
+              {
+                "Ref": "AWS::Partition"
+              },
+              ":execute-api:",
+              {
+                "Ref": "AWS::Region"
+              },
+              ":",
+              {
+                "Ref": "AWS::AccountId"
+              },
+              ":",
+              {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "/*/*"
+            ]
+          ]
+        }
+      }
+    },
+    "GetCustomerLambdaPermissionApiGateway": {
+      "Type": "AWS::Lambda::Permission",
+      "Properties": {
+        "FunctionName": {
+          "Fn::GetAtt": [
+            "GetCustomerLambdaFunction",
+            "Arn"
+          ]
+        },
+        "Action": "lambda:InvokeFunction",
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": {
+          "Fn::Join": [
+            "",
+            [
+              "arn:",
+              {
+                "Ref": "AWS::Partition"
+              },
+              ":execute-api:",
+              {
+                "Ref": "AWS::Region"
+              },
+              ":",
+              {
+                "Ref": "AWS::AccountId"
+              },
+              ":",
+              {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "/*/*"
+            ]
+          ]
+        }
+      }
+    },
+    "UpdateCustomerLambdaPermissionApiGateway": {
+      "Type": "AWS::Lambda::Permission",
+      "Properties": {
+        "FunctionName": {
+          "Fn::GetAtt": [
+            "UpdateCustomerLambdaFunction",
+            "Arn"
+          ]
+        },
+        "Action": "lambda:InvokeFunction",
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": {
+          "Fn::Join": [
+            "",
+            [
+              "arn:",
+              {
+                "Ref": "AWS::Partition"
+              },
+              ":execute-api:",
+              {
+                "Ref": "AWS::Region"
+              },
+              ":",
+              {
+                "Ref": "AWS::AccountId"
+              },
+              ":",
+              {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "/*/*"
+            ]
+          ]
+        }
+      }
+    },
     "ApiGatewayLogGroup": {
       "Type": "AWS::Logs::LogGroup",
       "Properties": {
@@ -1245,7 +2330,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/serverless-stripe-integration/dev/1642594146538-2022-01-19T12:09:06.538Z/custom-resources.zip"
+          "S3Key": "serverless/serverless-stripe-integration/dev/1644488487914-2022-02-10T10:21:27.914Z/custom-resources.zip"
         },
         "FunctionName": "serverless-stripe-integration-dev-custom-resource-apigw-cw-role",
         "Handler": "apiGatewayCloudWatchRole/handler.handler",
@@ -1313,6 +2398,66 @@
         }
       }
     },
+    "CWLSubFilterGetPaymentTypeLogGroupEuWest1": {
+      "Type": "AWS::Logs::SubscriptionFilter",
+      "Properties": {
+        "DestinationArn": "arn:aws:logs:eu-west-1:802587217904:destination:350280e5-98ef-4cc0-abff-4f05f91ed086#Wnrv1K2hHg0xPYXC9b#serverless-stripe-integration#dev",
+        "FilterPattern": "?\"REPORT RequestId: \" ?\"SERVERLESS_ENTERPRISE\"",
+        "LogGroupName": {
+          "Ref": "GetPaymentTypeLogGroup"
+        }
+      }
+    },
+    "CWLSubFilterUpdatePaymentMethodLogGroupEuWest1": {
+      "Type": "AWS::Logs::SubscriptionFilter",
+      "Properties": {
+        "DestinationArn": "arn:aws:logs:eu-west-1:802587217904:destination:350280e5-98ef-4cc0-abff-4f05f91ed086#Wnrv1K2hHg0xPYXC9b#serverless-stripe-integration#dev",
+        "FilterPattern": "?\"REPORT RequestId: \" ?\"SERVERLESS_ENTERPRISE\"",
+        "LogGroupName": {
+          "Ref": "UpdatePaymentMethodLogGroup"
+        }
+      }
+    },
+    "CWLSubFilterGetCustomerPortalLogGroupEuWest1": {
+      "Type": "AWS::Logs::SubscriptionFilter",
+      "Properties": {
+        "DestinationArn": "arn:aws:logs:eu-west-1:802587217904:destination:350280e5-98ef-4cc0-abff-4f05f91ed086#Wnrv1K2hHg0xPYXC9b#serverless-stripe-integration#dev",
+        "FilterPattern": "?\"REPORT RequestId: \" ?\"SERVERLESS_ENTERPRISE\"",
+        "LogGroupName": {
+          "Ref": "GetCustomerPortalLogGroup"
+        }
+      }
+    },
+    "CWLSubFilterGetProductsListLogGroupEuWest1": {
+      "Type": "AWS::Logs::SubscriptionFilter",
+      "Properties": {
+        "DestinationArn": "arn:aws:logs:eu-west-1:802587217904:destination:350280e5-98ef-4cc0-abff-4f05f91ed086#Wnrv1K2hHg0xPYXC9b#serverless-stripe-integration#dev",
+        "FilterPattern": "?\"REPORT RequestId: \" ?\"SERVERLESS_ENTERPRISE\"",
+        "LogGroupName": {
+          "Ref": "GetProductsListLogGroup"
+        }
+      }
+    },
+    "CWLSubFilterGetCustomerLogGroupEuWest1": {
+      "Type": "AWS::Logs::SubscriptionFilter",
+      "Properties": {
+        "DestinationArn": "arn:aws:logs:eu-west-1:802587217904:destination:350280e5-98ef-4cc0-abff-4f05f91ed086#Wnrv1K2hHg0xPYXC9b#serverless-stripe-integration#dev",
+        "FilterPattern": "?\"REPORT RequestId: \" ?\"SERVERLESS_ENTERPRISE\"",
+        "LogGroupName": {
+          "Ref": "GetCustomerLogGroup"
+        }
+      }
+    },
+    "CWLSubFilterUpdateCustomerLogGroupEuWest1": {
+      "Type": "AWS::Logs::SubscriptionFilter",
+      "Properties": {
+        "DestinationArn": "arn:aws:logs:eu-west-1:802587217904:destination:350280e5-98ef-4cc0-abff-4f05f91ed086#Wnrv1K2hHg0xPYXC9b#serverless-stripe-integration#dev",
+        "FilterPattern": "?\"REPORT RequestId: \" ?\"SERVERLESS_ENTERPRISE\"",
+        "LogGroupName": {
+          "Ref": "UpdateCustomerLogGroup"
+        }
+      }
+    },
     "CWLSubFilterApiGatewayLogGroupEuWest1": {
       "Type": "AWS::Logs::SubscriptionFilter",
       "Properties": {
@@ -1347,7 +2492,7 @@
     "HelloLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "HelloLambdaVersion2l486ntete2ZrNLqQ2hZT6TUjE5mII4NK8v3jFO9zhI"
+        "Ref": "HelloLambdaVersion8fBNeGqcycnrwV7Ik60nq6bns8znCAUsgXbGpRr4"
       },
       "Export": {
         "Name": "sls-serverless-stripe-integration-dev-HelloLambdaFunctionQualifiedArn"
@@ -1356,7 +2501,7 @@
     "CreateCustomerLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "CreateCustomerLambdaVersionOY9WEBkG8PgS5NnivkuaEj5Tgh1oYXBqy43BpdTMc"
+        "Ref": "CreateCustomerLambdaVersionkK2yiPzayVYMrzkryLhAXTkvyYXKF0jm8kBoeUYAo"
       },
       "Export": {
         "Name": "sls-serverless-stripe-integration-dev-CreateCustomerLambdaFunctionQualifiedArn"
@@ -1365,16 +2510,25 @@
     "CreateSubscriptionLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "CreateSubscriptionLambdaVersionDz8obOWFgSQK1HMTFmp2TBD0EZ5IrnTPhdtrrEm8HlI"
+        "Ref": "CreateSubscriptionLambdaVersionDbNxUJf9ZlpXziWHBmDEQj0frCve40IsegG665dII8"
       },
       "Export": {
         "Name": "sls-serverless-stripe-integration-dev-CreateSubscriptionLambdaFunctionQualifiedArn"
       }
     },
+    "GetPaymentTypeLambdaFunctionQualifiedArn": {
+      "Description": "Current Lambda function version",
+      "Value": {
+        "Ref": "GetPaymentTypeLambdaVersionnD1PamKTWjxLdfsmBzvBTc14tFMmZqNaIXuRfxXk"
+      },
+      "Export": {
+        "Name": "sls-serverless-stripe-integration-dev-GetPaymentTypeLambdaFunctionQualifiedArn"
+      }
+    },
     "HandleSubscriptionLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "HandleSubscriptionLambdaVersionEQS4udHm3N4yPaEzdx8tolkLvYzI6j9nJuSJbfpr1vg"
+        "Ref": "HandleSubscriptionLambdaVersionXOQKPlGdP6toubtGBfphPTWhDgy4xqNpjLGmZ3ihML4"
       },
       "Export": {
         "Name": "sls-serverless-stripe-integration-dev-HandleSubscriptionLambdaFunctionQualifiedArn"
@@ -1383,10 +2537,55 @@
     "GetSubscriptionLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "GetSubscriptionLambdaVersion5ttkY72vPzjjiWAzsEz7cc84Soc70NDsy9FLJw5Vb68"
+        "Ref": "GetSubscriptionLambdaVersionmnv8EIbCCDdmIBYf0huextWixwwaijCvdorC6lT3z8"
       },
       "Export": {
         "Name": "sls-serverless-stripe-integration-dev-GetSubscriptionLambdaFunctionQualifiedArn"
+      }
+    },
+    "UpdatePaymentMethodLambdaFunctionQualifiedArn": {
+      "Description": "Current Lambda function version",
+      "Value": {
+        "Ref": "UpdatePaymentMethodLambdaVersionMMMhNQhGuJ0YuJasFIzqDiqthZNVCGNxm7JONEVTE"
+      },
+      "Export": {
+        "Name": "sls-serverless-stripe-integration-dev-UpdatePaymentMethodLambdaFunctionQualifiedArn"
+      }
+    },
+    "GetCustomerPortalLambdaFunctionQualifiedArn": {
+      "Description": "Current Lambda function version",
+      "Value": {
+        "Ref": "GetCustomerPortalLambdaVersionCns2ucchqv9c6RqRdxlrRMkA8y0UjbkTTPyUwjmqCk"
+      },
+      "Export": {
+        "Name": "sls-serverless-stripe-integration-dev-GetCustomerPortalLambdaFunctionQualifiedArn"
+      }
+    },
+    "GetProductsListLambdaFunctionQualifiedArn": {
+      "Description": "Current Lambda function version",
+      "Value": {
+        "Ref": "GetProductsListLambdaVersionULlafdIgKO86kVldtDBmKY5rxPTWNq9JZ5brku930"
+      },
+      "Export": {
+        "Name": "sls-serverless-stripe-integration-dev-GetProductsListLambdaFunctionQualifiedArn"
+      }
+    },
+    "GetCustomerLambdaFunctionQualifiedArn": {
+      "Description": "Current Lambda function version",
+      "Value": {
+        "Ref": "GetCustomerLambdaVersionvqn5vQTcjVOVY3YVAO93XB0EQeSPCPMjVSTIiu1SWE"
+      },
+      "Export": {
+        "Name": "sls-serverless-stripe-integration-dev-GetCustomerLambdaFunctionQualifiedArn"
+      }
+    },
+    "UpdateCustomerLambdaFunctionQualifiedArn": {
+      "Description": "Current Lambda function version",
+      "Value": {
+        "Ref": "UpdateCustomerLambdaVersionmtQGcdusfXXzuN6PyhuNlsyrx8XYyZb3APUxUDXXNg"
+      },
+      "Export": {
+        "Name": "sls-serverless-stripe-integration-dev-UpdateCustomerLambdaFunctionQualifiedArn"
       }
     },
     "ServiceEndpoint": {

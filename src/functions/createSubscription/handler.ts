@@ -5,6 +5,7 @@ interface IBody {
 	email: string;
 	username: string;
 	productPlan: string;
+	name: string;
 }
 
 const createSubscription = async (
@@ -17,8 +18,8 @@ const createSubscription = async (
 		return;
 	}
 	const body = JSON.parse(event.body) as IBody;
-	const { email, username, productPlan } = body;
-	if (!email || !username || !productPlan) {
+	const { email, name, productPlan } = body;
+	if (!email || !name || !productPlan) {
 		callback(null, {
 			statusCode: 400,
 			body: "Missing email or username or product id",
@@ -29,16 +30,22 @@ const createSubscription = async (
 		// Create a new customer
 		const customer = await stripe.customers.create({
 			email,
-			name: username,
+			name,
 		});
 		const customerId = customer.id;
 
 		const subscription = await stripe.subscriptions.create({
 			customer: customerId,
-			items: [{ plan: productPlan }],
+			items: [{ price: productPlan }],
 		});
 
+		console.log(subscription);
 		callback(null, {
+			headers: {
+				"Access-Control-Allow-Origin": "*",
+				"Access-Control-Allow-Headers": "x-requested-with",
+				"Access-Control-Allow-Credentials": true,
+			},
 			statusCode: 200,
 			body: JSON.stringify(subscription),
 		});

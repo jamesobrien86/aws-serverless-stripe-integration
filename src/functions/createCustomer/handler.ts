@@ -36,6 +36,11 @@ const createCustomer = async (
 			name: username,
 		});
 		callback(null, {
+			headers: {
+				"Access-Control-Allow-Origin": "*",
+				"Access-Control-Allow-Headers": "x-requested-with",
+				"Access-Control-Allow-Credentials": true,
+			},
 			statusCode: 200,
 			body: JSON.stringify(customer),
 		});
