@@ -2,3 +2,5 @@ node_modules
 .serverless/
 .serverless
 .esbuild/
+
+package-json.lock
