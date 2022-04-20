@@ -18,7 +18,7 @@ const getCustomerPortal = async (
 	}
 	const body = JSON.parse(event.body) as IBody;
 	const { customer, return_url } = body;
-	if (!customer || !return_url) {
+	if (!return_url) {
 		callback(null, {
 			statusCode: 400,
 			body: "Missing customer or url",

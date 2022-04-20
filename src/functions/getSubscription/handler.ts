@@ -2,7 +2,7 @@ import { stripe } from "@libs/stripe";
 import { APIGatewayProxyEvent } from "aws-lambda";
 
 interface IBody {
-	customerID: string;
+	subscriptionID: string;
 }
 
 const getSubscription = async (
@@ -15,9 +15,9 @@ const getSubscription = async (
 		return;
 	}
 	const body = JSON.parse(event.body) as IBody;
-	const { customerID } = body;
+	const { subscriptionID } = body;
 
-	if (!customerID) {
+	if (!subscriptionID) {
 		callback(null, {
 			statusCode: 400,
 			body: "Missing Customer id",
@@ -26,18 +26,7 @@ const getSubscription = async (
 	}
 
 	try {
-		const customerSubscriptions: any = await stripe.customers.retrieve(
-			customerID,
-			{
-				expand: ["subscriptions.data"],
-			}
-		);
-
-		let { data } = customerSubscriptions.subscriptions;
-
-		const subID = data[0].plan.product;
-
-		const product = await stripe.products.retrieve(subID);
+		const product = await stripe.products.retrieve(subscriptionID);
 
 		callback(null, {
 			headers: {

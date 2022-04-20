@@ -7,7 +7,7 @@ export default {
 		{
 			http: {
 				method: "post",
-				path: "createSubscription",
+				path: "getCheckoutSession",
 				request: {
 					schemas: {
 						"application/json": schema,

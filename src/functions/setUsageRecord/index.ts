@@ -7,7 +7,7 @@ export default {
 		{
 			http: {
 				method: "post",
-				path: "getSubscription",
+				path: "updateCustomer",
 				request: {
 					schemas: {
 						"application/json": schema,

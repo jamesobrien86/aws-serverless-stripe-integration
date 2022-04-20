@@ -1,15 +1,14 @@
 import type { AWS } from "@serverless/typescript";
 
 import createCustomer from "@functions/createCustomer";
-import createSubscription from "@functions/createSubscription";
 import handleSubscription from "@functions/handleSubscription";
 import getSubscription from "@functions/getSubscription";
-import getPaymentType from "@functions/getPaymentType";
 import updatePaymentMethod from "@functions/updatePaymentMethod";
 import getCustomerPortal from "@functions/getCustomerPortal";
-import getProductsList from "@functions/getProductsList";
 import getCustomer from "@functions/getCustomer";
 import updateCustomer from "@functions/updateCustomer";
+import createCheckoutSession from "@functions/createCheckoutSession";
+import getCheckoutSession from "@functions/getCheckoutSession";
 
 const serverlessConfiguration: AWS = {
 	service: "serverless-stripe-integration",
@@ -36,15 +35,14 @@ const serverlessConfiguration: AWS = {
 	// import the function via paths
 	functions: {
 		createCustomer,
-		createSubscription,
 		handleSubscription,
 		getSubscription,
-		getPaymentType,
 		updatePaymentMethod,
 		getCustomerPortal,
-		getProductsList,
 		getCustomer,
 		updateCustomer,
+		createCheckoutSession,
+		getCheckoutSession,
 	},
 	package: { individually: true },
 	custom: {

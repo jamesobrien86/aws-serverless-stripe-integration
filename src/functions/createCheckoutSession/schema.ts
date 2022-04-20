@@ -1,8 +1,8 @@
 export default {
 	type: "object",
 	properties: {
-		customer: { type: "string" },
 		return_url: { type: "string" },
+		customer_email: { type: "string" },
+		customer_id: { type: "string" },
 	},
-	required: ["return_url"],
 } as const;
