@@ -147,6 +147,12 @@
               "LogGroupName": "/aws/lambda/serverless-stripe-integration-dev-getCheckoutSession"
             }
           },
+          "SetUsageRecordLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/serverless-stripe-integration-dev-setUsageRecord"
+            }
+          },
           "IamRoleLambdaExecution": {
             "Type": "AWS::IAM::Role",
             "Properties": {
@@ -309,6 +315,12 @@
                               "GetCheckoutSessionLogGroup",
                               "Arn"
                             ]
+                          },
+                          {
+                            "Fn::GetAtt": [
+                              "SetUsageRecordLogGroup",
+                              "Arn"
+                            ]
                           }
                         ]
                       }
@@ -325,7 +337,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/serverless-stripe-integration/dev/1649248285076-2022-04-06T12:31:25.076Z/createCustomer.zip"
+                "S3Key": "serverless/serverless-stripe-integration/dev/1653897343325-2022-05-30T07:55:43.325Z/createCustomer.zip"
               },
               "Handler": "s_createCustomer.handler",
               "Runtime": "nodejs14.x",
@@ -356,7 +368,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/serverless-stripe-integration/dev/1649248285076-2022-04-06T12:31:25.076Z/handleSubscription.zip"
+                "S3Key": "serverless/serverless-stripe-integration/dev/1653897343325-2022-05-30T07:55:43.325Z/handleSubscription.zip"
               },
               "Handler": "s_handleSubscription.handler",
               "Runtime": "nodejs14.x",
@@ -387,7 +399,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/serverless-stripe-integration/dev/1649248285076-2022-04-06T12:31:25.076Z/getSubscription.zip"
+                "S3Key": "serverless/serverless-stripe-integration/dev/1653897343325-2022-05-30T07:55:43.325Z/getSubscription.zip"
               },
               "Handler": "s_getSubscription.handler",
               "Runtime": "nodejs14.x",
@@ -418,7 +430,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/serverless-stripe-integration/dev/1649248285076-2022-04-06T12:31:25.076Z/updatePaymentMethod.zip"
+                "S3Key": "serverless/serverless-stripe-integration/dev/1653897343325-2022-05-30T07:55:43.325Z/updatePaymentMethod.zip"
               },
               "Handler": "s_updatePaymentMethod.handler",
               "Runtime": "nodejs14.x",
@@ -449,7 +461,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/serverless-stripe-integration/dev/1649248285076-2022-04-06T12:31:25.076Z/getCustomerPortal.zip"
+                "S3Key": "serverless/serverless-stripe-integration/dev/1653897343325-2022-05-30T07:55:43.325Z/getCustomerPortal.zip"
               },
               "Handler": "s_getCustomerPortal.handler",
               "Runtime": "nodejs14.x",
@@ -480,7 +492,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/serverless-stripe-integration/dev/1649248285076-2022-04-06T12:31:25.076Z/getCustomer.zip"
+                "S3Key": "serverless/serverless-stripe-integration/dev/1653897343325-2022-05-30T07:55:43.325Z/getCustomer.zip"
               },
               "Handler": "s_getCustomer.handler",
               "Runtime": "nodejs14.x",
@@ -511,7 +523,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/serverless-stripe-integration/dev/1649248285076-2022-04-06T12:31:25.076Z/updateCustomer.zip"
+                "S3Key": "serverless/serverless-stripe-integration/dev/1653897343325-2022-05-30T07:55:43.325Z/updateCustomer.zip"
               },
               "Handler": "s_updateCustomer.handler",
               "Runtime": "nodejs14.x",
@@ -542,7 +554,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/serverless-stripe-integration/dev/1649248285076-2022-04-06T12:31:25.076Z/createCheckoutSession.zip"
+                "S3Key": "serverless/serverless-stripe-integration/dev/1653897343325-2022-05-30T07:55:43.325Z/createCheckoutSession.zip"
               },
               "Handler": "s_createCheckoutSession.handler",
               "Runtime": "nodejs14.x",
@@ -573,7 +585,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/serverless-stripe-integration/dev/1649248285076-2022-04-06T12:31:25.076Z/getCheckoutSession.zip"
+                "S3Key": "serverless/serverless-stripe-integration/dev/1653897343325-2022-05-30T07:55:43.325Z/getCheckoutSession.zip"
               },
               "Handler": "s_getCheckoutSession.handler",
               "Runtime": "nodejs14.x",
@@ -597,94 +609,135 @@
               "GetCheckoutSessionLogGroup"
             ]
           },
-          "CreateCustomerLambdaVersionzqHzVogtPYRlVxonAgKkK44O6s8KzqsYKvYBQcID08": {
-            "Type": "AWS::Lambda::Version",
-            "DeletionPolicy": "Retain",
+          "SetUsageRecordLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
             "Properties": {
-              "FunctionName": {
-                "Ref": "CreateCustomerLambdaFunction"
+              "Code": {
+                "S3Bucket": {
+                  "Ref": "ServerlessDeploymentBucket"
+                },
+                "S3Key": "serverless/serverless-stripe-integration/dev/1653897343325-2022-05-30T07:55:43.325Z/setUsageRecord.zip"
               },
-              "CodeSha256": "d14Ldgl2a6fb8nF3YyrFabcWkK3vvg6/hiPlthnDH1E="
-            }
+              "Handler": "s_setUsageRecord.handler",
+              "Runtime": "nodejs14.x",
+              "FunctionName": "serverless-stripe-integration-dev-setUsageRecord",
+              "MemorySize": 1024,
+              "Timeout": 12,
+              "Environment": {
+                "Variables": {
+                  "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
+                  "NODE_OPTIONS": "--enable-source-maps --stack-trace-limit=1000"
+                }
+              },
+              "Role": {
+                "Fn::GetAtt": [
+                  "IamRoleLambdaExecution",
+                  "Arn"
+                ]
+              }
+            },
+            "DependsOn": [
+              "SetUsageRecordLogGroup"
+            ]
           },
-          "GetSubscriptionLambdaVersionpE3V6x9nHUXnqjGhVuob5sM5PAmLf5K0UMtdH7whY6w": {
+          "GetSubscriptionLambdaVersion18XztjK0uk5Rk9fWJH9riVjcut9ZEd4lsUKKgDsLNY": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "GetSubscriptionLambdaFunction"
               },
-              "CodeSha256": "DOSLIkj+wl+FwK719YKwCrmcCytNLlxs+/cTQw535LE="
+              "CodeSha256": "PjoNORXcVW6EYWh4RgSyXI+u9+r5zDKJATKiuEOcyH4="
             }
           },
-          "UpdatePaymentMethodLambdaVersionMmFWvpZGqwbKMv1UrfhsJZenC3CfFPvAGI96ha5FRVM": {
+          "CreateCustomerLambdaVersionE1yUXroyGidSZwgCtX681UF6ZzTgcK9Ikz6JKNxc": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
-                "Ref": "UpdatePaymentMethodLambdaFunction"
+                "Ref": "CreateCustomerLambdaFunction"
               },
-              "CodeSha256": "V47RfmNIRoZBpLRBWhXnmJEhy/X4SP+ncN1bSfCHzRc="
+              "CodeSha256": "HFBzDPHNIyuo53EoRJ9z7Oa1r0BZsiTunQrb+2wgyPo="
             }
           },
-          "HandleSubscriptionLambdaVersionv7O0Yl8aiSk2gExdtv7tfaHC0XBpvu6BjSpZdEyzg": {
+          "HandleSubscriptionLambdaVersionVvr0x8WXdMKTGcp5JSF4TMjfcepEMKyJQpGKbTfqTc": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "HandleSubscriptionLambdaFunction"
               },
-              "CodeSha256": "dGyT2AIuUn1d2znkYJNWPwiXUQuNPEk8YSH9KC5r2XE="
+              "CodeSha256": "nxvL6KvnS3wH5Tz3enApJrug/74m6I/VXr7VPcJRC0U="
             }
           },
-          "GetCustomerPortalLambdaVersionXo39ILE3gkl9ewQ2L8hhIgdzwprhJJbpOVZDj14lE4U": {
+          "UpdatePaymentMethodLambdaVersion2MBgZDsCTQvTNckpTYmI4AVTrKmrw0mbbvbHxMa2SoE": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
-                "Ref": "GetCustomerPortalLambdaFunction"
+                "Ref": "UpdatePaymentMethodLambdaFunction"
               },
-              "CodeSha256": "sGOG8eN/BFvoi/ISVY3zuX0vScbNW8j3kh5At7/J8ps="
+              "CodeSha256": "QsfTEptNJub5GckoRjMmIytJUbzGr1MxhSpGJcTQAQU="
             }
           },
-          "GetCustomerLambdaVersionwE7ZQ5Io5Ju3HJ5iX1V1JWnoX6CJJIQpUVVtV9UPRk": {
+          "GetCustomerLambdaVersionnG5vAqUyXhmxwWnDPfGTcNFbtpA5rI4T9lwW8e4w5A": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "GetCustomerLambdaFunction"
               },
-              "CodeSha256": "U3yLPiCuOkJB7qyfsnhPVbnA1KR7uLNC8DzW+Sxlk0Y="
+              "CodeSha256": "hwoa4cgGx1CKHBkVPxCYz5CG5pKUItfQZ57vTHJgnUY="
             }
           },
-          "UpdateCustomerLambdaVersionFPbpHYs4WimWp3eMf0kVIZ4Sx6jSvANTCFQ7aaOU2E": {
+          "GetCustomerPortalLambdaVersionyYwDcmeqKw2lY4MxvCMu9igdsW5VEUJ7wtq7N9YG9Q": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
-                "Ref": "UpdateCustomerLambdaFunction"
+                "Ref": "GetCustomerPortalLambdaFunction"
               },
-              "CodeSha256": "x4BOwLexXmcJWtVXmoltsSbdwhC/5Ue6X0Z4ZIdU9Ig="
+              "CodeSha256": "EJ+8baKcjiszr0fXAmlfK0B/osz2mPXtW5sikNs7MOY="
             }
           },
-          "CreateCheckoutSessionLambdaVersionHZkOFCzlq3q6Q5gWQqKVuXeMvxUhCVRM61FVI50vr4M": {
+          "CreateCheckoutSessionLambdaVersionm3zyEdqpaBwfUJVefHZ7EnPL8uZxG0yf1Jw4xl0": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "CreateCheckoutSessionLambdaFunction"
               },
-              "CodeSha256": "4b4itRSMJuYhSokiNs7W1TZZHyJcPZNPwzaZHv2T/kc="
+              "CodeSha256": "4R8SzhnWTLjwfTSRPCivy64FrMMoLU6tLMcN5vsUG6I="
             }
           },
-          "GetCheckoutSessionLambdaVersion1eSEQeO004ekxv0XOp2lgblAto3vKzELS6fYo1FgG8": {
+          "UpdateCustomerLambdaVersion2CeQhtMsqB5qklpYG8qTn2bBsYAaeKY7hIERi0r7WE": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "UpdateCustomerLambdaFunction"
+              },
+              "CodeSha256": "vWnSfNaHEAV8N16l+IM2XiZrCtY8N6ciRK7uzGRmcBQ="
+            }
+          },
+          "GetCheckoutSessionLambdaVersionsxTJ3st4INikzg2yXYq6S4LsI0aRzS0jDXK4eQBnXI": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "GetCheckoutSessionLambdaFunction"
               },
-              "CodeSha256": "/MwknG2etNCchirdkhLLEZnqOmEzUoR5596CwslNYoQ="
+              "CodeSha256": "WEGZW3kQxYJ2+g+kmMQDr8KEuXw2ecpEaSxi52Sov7E="
+            }
+          },
+          "SetUsageRecordLambdaVersionckFPmiZkXcu09iRIE8gc5ejenClpk2I1tSnaCHjvQY": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "SetUsageRecordLambdaFunction"
+              },
+              "CodeSha256": "87LWb2B2rnaVk21IJ61AfvuDGDYuX2OmBDr8s29KlYE="
             }
           },
           "ApiGatewayRestApi": {
@@ -830,6 +883,21 @@
                 ]
               },
               "PathPart": "getCheckoutSession",
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayResourceSetusagerecord": {
+            "Type": "AWS::ApiGateway::Resource",
+            "Properties": {
+              "ParentId": {
+                "Fn::GetAtt": [
+                  "ApiGatewayRestApi",
+                  "RootResourceId"
+                ]
+              },
+              "PathPart": "setUsageRecord",
               "RestApiId": {
                 "Ref": "ApiGatewayRestApi"
               }
@@ -1321,6 +1389,60 @@
               "GetCheckoutSessionLambdaPermissionApiGateway"
             ]
           },
+          "ApiGatewayMethodSetusagerecordPost": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "HttpMethod": "POST",
+              "RequestParameters": {},
+              "ResourceId": {
+                "Ref": "ApiGatewayResourceSetusagerecord"
+              },
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "ApiKeyRequired": false,
+              "AuthorizationType": "NONE",
+              "Integration": {
+                "IntegrationHttpMethod": "POST",
+                "Type": "AWS_PROXY",
+                "Uri": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":apigateway:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":lambda:path/2015-03-31/functions/",
+                      {
+                        "Fn::GetAtt": [
+                          "SetUsageRecordLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "/invocations"
+                    ]
+                  ]
+                }
+              },
+              "MethodResponses": [],
+              "RequestValidatorId": {
+                "Ref": "ApiGatewayServerlessstripeintegrationRequestValidator"
+              },
+              "RequestModels": {
+                "application/json": {
+                  "Ref": "ApiGatewayMethodSetusagerecordPostApplicationJsonModel"
+                }
+              }
+            },
+            "DependsOn": [
+              "SetUsageRecordLambdaPermissionApiGateway"
+            ]
+          },
           "ApiGatewayServerlessstripeintegrationRequestValidator": {
             "Type": "AWS::ApiGateway::RequestValidator",
             "Properties": {
@@ -1523,7 +1645,19 @@
               }
             }
           },
-          "ApiGatewayDeployment1649248275997": {
+          "ApiGatewayMethodSetusagerecordPostApplicationJsonModel": {
+            "Type": "AWS::ApiGateway::Model",
+            "Properties": {
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "ContentType": "application/json",
+              "Schema": {
+                "type": "object"
+              }
+            }
+          },
+          "ApiGatewayDeployment1653897335643": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -1540,7 +1674,8 @@
               "ApiGatewayMethodGetcustomerPost",
               "ApiGatewayMethodUpdatecustomerPost",
               "ApiGatewayMethodCreatecheckoutsessionPost",
-              "ApiGatewayMethodGetcheckoutsessionPost"
+              "ApiGatewayMethodGetcheckoutsessionPost",
+              "ApiGatewayMethodSetusagerecordPost"
             ]
           },
           "CreateCustomerLambdaPermissionApiGateway": {
@@ -1876,6 +2011,43 @@
               }
             }
           },
+          "SetUsageRecordLambdaPermissionApiGateway": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "SetUsageRecordLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "Ref": "ApiGatewayRestApi"
+                    },
+                    "/*/*"
+                  ]
+                ]
+              }
+            }
+          },
           "ApiGatewayLogGroup": {
             "Type": "AWS::Logs::LogGroup",
             "Properties": {
@@ -1985,7 +2157,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/serverless-stripe-integration/dev/1649248285076-2022-04-06T12:31:25.076Z/custom-resources.zip"
+                "S3Key": "serverless/serverless-stripe-integration/dev/1653897343325-2022-05-30T07:55:43.325Z/custom-resources.zip"
               },
               "FunctionName": "serverless-stripe-integration-dev-custom-resource-apigw-cw-role",
               "Handler": "apiGatewayCloudWatchRole/handler.handler",
@@ -2093,6 +2265,16 @@
               }
             }
           },
+          "CWLSubFilterSetUsageRecordLogGroupEuWest1": {
+            "Type": "AWS::Logs::SubscriptionFilter",
+            "Properties": {
+              "DestinationArn": "arn:aws:logs:eu-west-1:802587217904:destination:350280e5-98ef-4cc0-abff-4f05f91ed086#Wnrv1K2hHg0xPYXC9b#serverless-stripe-integration#dev",
+              "FilterPattern": "?\"REPORT RequestId: \" ?\"SERVERLESS_ENTERPRISE\"",
+              "LogGroupName": {
+                "Ref": "SetUsageRecordLogGroup"
+              }
+            }
+          },
           "CWLSubFilterApiGatewayLogGroupEuWest1": {
             "Type": "AWS::Logs::SubscriptionFilter",
             "Properties": {
@@ -2124,85 +2306,94 @@
               "Name": "sls-serverless-stripe-integration-dev-EnterpriseLogAccessIamRole"
             }
           },
-          "CreateCustomerLambdaFunctionQualifiedArn": {
-            "Description": "Current Lambda function version",
-            "Value": {
-              "Ref": "CreateCustomerLambdaVersionzqHzVogtPYRlVxonAgKkK44O6s8KzqsYKvYBQcID08"
-            },
-            "Export": {
-              "Name": "sls-serverless-stripe-integration-dev-CreateCustomerLambdaFunctionQualifiedArn"
-            }
-          },
           "GetSubscriptionLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "GetSubscriptionLambdaVersionpE3V6x9nHUXnqjGhVuob5sM5PAmLf5K0UMtdH7whY6w"
+              "Ref": "GetSubscriptionLambdaVersion18XztjK0uk5Rk9fWJH9riVjcut9ZEd4lsUKKgDsLNY"
             },
             "Export": {
               "Name": "sls-serverless-stripe-integration-dev-GetSubscriptionLambdaFunctionQualifiedArn"
             }
           },
-          "UpdatePaymentMethodLambdaFunctionQualifiedArn": {
+          "CreateCustomerLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "UpdatePaymentMethodLambdaVersionMmFWvpZGqwbKMv1UrfhsJZenC3CfFPvAGI96ha5FRVM"
+              "Ref": "CreateCustomerLambdaVersionE1yUXroyGidSZwgCtX681UF6ZzTgcK9Ikz6JKNxc"
             },
             "Export": {
-              "Name": "sls-serverless-stripe-integration-dev-UpdatePaymentMethodLambdaFunctionQualifiedArn"
+              "Name": "sls-serverless-stripe-integration-dev-CreateCustomerLambdaFunctionQualifiedArn"
             }
           },
           "HandleSubscriptionLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "HandleSubscriptionLambdaVersionv7O0Yl8aiSk2gExdtv7tfaHC0XBpvu6BjSpZdEyzg"
+              "Ref": "HandleSubscriptionLambdaVersionVvr0x8WXdMKTGcp5JSF4TMjfcepEMKyJQpGKbTfqTc"
             },
             "Export": {
               "Name": "sls-serverless-stripe-integration-dev-HandleSubscriptionLambdaFunctionQualifiedArn"
             }
           },
-          "GetCustomerPortalLambdaFunctionQualifiedArn": {
+          "UpdatePaymentMethodLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "GetCustomerPortalLambdaVersionXo39ILE3gkl9ewQ2L8hhIgdzwprhJJbpOVZDj14lE4U"
+              "Ref": "UpdatePaymentMethodLambdaVersion2MBgZDsCTQvTNckpTYmI4AVTrKmrw0mbbvbHxMa2SoE"
             },
             "Export": {
-              "Name": "sls-serverless-stripe-integration-dev-GetCustomerPortalLambdaFunctionQualifiedArn"
+              "Name": "sls-serverless-stripe-integration-dev-UpdatePaymentMethodLambdaFunctionQualifiedArn"
             }
           },
           "GetCustomerLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "GetCustomerLambdaVersionwE7ZQ5Io5Ju3HJ5iX1V1JWnoX6CJJIQpUVVtV9UPRk"
+              "Ref": "GetCustomerLambdaVersionnG5vAqUyXhmxwWnDPfGTcNFbtpA5rI4T9lwW8e4w5A"
             },
             "Export": {
               "Name": "sls-serverless-stripe-integration-dev-GetCustomerLambdaFunctionQualifiedArn"
             }
           },
-          "UpdateCustomerLambdaFunctionQualifiedArn": {
+          "GetCustomerPortalLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "UpdateCustomerLambdaVersionFPbpHYs4WimWp3eMf0kVIZ4Sx6jSvANTCFQ7aaOU2E"
+              "Ref": "GetCustomerPortalLambdaVersionyYwDcmeqKw2lY4MxvCMu9igdsW5VEUJ7wtq7N9YG9Q"
             },
             "Export": {
-              "Name": "sls-serverless-stripe-integration-dev-UpdateCustomerLambdaFunctionQualifiedArn"
+              "Name": "sls-serverless-stripe-integration-dev-GetCustomerPortalLambdaFunctionQualifiedArn"
             }
           },
           "CreateCheckoutSessionLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "CreateCheckoutSessionLambdaVersionHZkOFCzlq3q6Q5gWQqKVuXeMvxUhCVRM61FVI50vr4M"
+              "Ref": "CreateCheckoutSessionLambdaVersionm3zyEdqpaBwfUJVefHZ7EnPL8uZxG0yf1Jw4xl0"
             },
             "Export": {
               "Name": "sls-serverless-stripe-integration-dev-CreateCheckoutSessionLambdaFunctionQualifiedArn"
             }
           },
+          "UpdateCustomerLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "UpdateCustomerLambdaVersion2CeQhtMsqB5qklpYG8qTn2bBsYAaeKY7hIERi0r7WE"
+            },
+            "Export": {
+              "Name": "sls-serverless-stripe-integration-dev-UpdateCustomerLambdaFunctionQualifiedArn"
+            }
+          },
           "GetCheckoutSessionLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "GetCheckoutSessionLambdaVersion1eSEQeO004ekxv0XOp2lgblAto3vKzELS6fYo1FgG8"
+              "Ref": "GetCheckoutSessionLambdaVersionsxTJ3st4INikzg2yXYq6S4LsI0aRzS0jDXK4eQBnXI"
             },
             "Export": {
               "Name": "sls-serverless-stripe-integration-dev-GetCheckoutSessionLambdaFunctionQualifiedArn"
+            }
+          },
+          "SetUsageRecordLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "SetUsageRecordLambdaVersionckFPmiZkXcu09iRIE8gc5ejenClpk2I1tSnaCHjvQY"
+            },
+            "Export": {
+              "Name": "sls-serverless-stripe-integration-dev-SetUsageRecordLambdaFunctionQualifiedArn"
             }
           },
           "ServiceEndpoint": {
@@ -2368,7 +2559,7 @@
         "timeout": 12,
         "runtime": "nodejs14.x",
         "vpc": {},
-        "versionLogicalId": "CreateCustomerLambdaVersionzqHzVogtPYRlVxonAgKkK44O6s8KzqsYKvYBQcID08"
+        "versionLogicalId": "CreateCustomerLambdaVersionE1yUXroyGidSZwgCtX681UF6ZzTgcK9Ikz6JKNxc"
       },
       "handleSubscription": {
         "handler": "s_handleSubscription.handler",
@@ -2396,7 +2587,7 @@
         "timeout": 12,
         "runtime": "nodejs14.x",
         "vpc": {},
-        "versionLogicalId": "HandleSubscriptionLambdaVersionv7O0Yl8aiSk2gExdtv7tfaHC0XBpvu6BjSpZdEyzg"
+        "versionLogicalId": "HandleSubscriptionLambdaVersionVvr0x8WXdMKTGcp5JSF4TMjfcepEMKyJQpGKbTfqTc"
       },
       "getSubscription": {
         "handler": "s_getSubscription.handler",
@@ -2424,7 +2615,7 @@
         "timeout": 12,
         "runtime": "nodejs14.x",
         "vpc": {},
-        "versionLogicalId": "GetSubscriptionLambdaVersionpE3V6x9nHUXnqjGhVuob5sM5PAmLf5K0UMtdH7whY6w"
+        "versionLogicalId": "GetSubscriptionLambdaVersion18XztjK0uk5Rk9fWJH9riVjcut9ZEd4lsUKKgDsLNY"
       },
       "updatePaymentMethod": {
         "handler": "s_updatePaymentMethod.handler",
@@ -2452,7 +2643,7 @@
         "timeout": 12,
         "runtime": "nodejs14.x",
         "vpc": {},
-        "versionLogicalId": "UpdatePaymentMethodLambdaVersionMmFWvpZGqwbKMv1UrfhsJZenC3CfFPvAGI96ha5FRVM"
+        "versionLogicalId": "UpdatePaymentMethodLambdaVersion2MBgZDsCTQvTNckpTYmI4AVTrKmrw0mbbvbHxMa2SoE"
       },
       "getCustomerPortal": {
         "handler": "s_getCustomerPortal.handler",
@@ -2480,7 +2671,7 @@
         "timeout": 12,
         "runtime": "nodejs14.x",
         "vpc": {},
-        "versionLogicalId": "GetCustomerPortalLambdaVersionXo39ILE3gkl9ewQ2L8hhIgdzwprhJJbpOVZDj14lE4U"
+        "versionLogicalId": "GetCustomerPortalLambdaVersionyYwDcmeqKw2lY4MxvCMu9igdsW5VEUJ7wtq7N9YG9Q"
       },
       "getCustomer": {
         "handler": "s_getCustomer.handler",
@@ -2508,7 +2699,7 @@
         "timeout": 12,
         "runtime": "nodejs14.x",
         "vpc": {},
-        "versionLogicalId": "GetCustomerLambdaVersionwE7ZQ5Io5Ju3HJ5iX1V1JWnoX6CJJIQpUVVtV9UPRk"
+        "versionLogicalId": "GetCustomerLambdaVersionnG5vAqUyXhmxwWnDPfGTcNFbtpA5rI4T9lwW8e4w5A"
       },
       "updateCustomer": {
         "handler": "s_updateCustomer.handler",
@@ -2536,7 +2727,7 @@
         "timeout": 12,
         "runtime": "nodejs14.x",
         "vpc": {},
-        "versionLogicalId": "UpdateCustomerLambdaVersionFPbpHYs4WimWp3eMf0kVIZ4Sx6jSvANTCFQ7aaOU2E"
+        "versionLogicalId": "UpdateCustomerLambdaVersion2CeQhtMsqB5qklpYG8qTn2bBsYAaeKY7hIERi0r7WE"
       },
       "createCheckoutSession": {
         "handler": "s_createCheckoutSession.handler",
@@ -2564,7 +2755,7 @@
         "timeout": 12,
         "runtime": "nodejs14.x",
         "vpc": {},
-        "versionLogicalId": "CreateCheckoutSessionLambdaVersionHZkOFCzlq3q6Q5gWQqKVuXeMvxUhCVRM61FVI50vr4M"
+        "versionLogicalId": "CreateCheckoutSessionLambdaVersionm3zyEdqpaBwfUJVefHZ7EnPL8uZxG0yf1Jw4xl0"
       },
       "getCheckoutSession": {
         "handler": "s_getCheckoutSession.handler",
@@ -2592,7 +2783,35 @@
         "timeout": 12,
         "runtime": "nodejs14.x",
         "vpc": {},
-        "versionLogicalId": "GetCheckoutSessionLambdaVersion1eSEQeO004ekxv0XOp2lgblAto3vKzELS6fYo1FgG8"
+        "versionLogicalId": "GetCheckoutSessionLambdaVersionsxTJ3st4INikzg2yXYq6S4LsI0aRzS0jDXK4eQBnXI"
+      },
+      "setUsageRecord": {
+        "handler": "s_setUsageRecord.handler",
+        "events": [
+          {
+            "http": {
+              "method": "post",
+              "path": "setUsageRecord",
+              "request": {
+                "schemas": {
+                  "application/json": {
+                    "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"ApiGatewayMethodSetusagerecordPostApplicationJsonModel\"][\"Properties\"][\"Schema\"]"
+                  }
+                }
+              },
+              "integration": "AWS_PROXY"
+            }
+          }
+        ],
+        "name": "serverless-stripe-integration-dev-setUsageRecord",
+        "package": {
+          "artifact": "/Users/jamesobrien/Documents/dev/conclave/stripe/.serverless/setUsageRecord.zip"
+        },
+        "memory": 1024,
+        "timeout": 12,
+        "runtime": "nodejs14.x",
+        "vpc": {},
+        "versionLogicalId": "SetUsageRecordLambdaVersionckFPmiZkXcu09iRIE8gc5ejenClpk2I1tSnaCHjvQY"
       }
     },
     "configValidationMode": "warn",
@@ -2630,7 +2849,7 @@
   },
   "package": {
     "individually": true,
-    "artifactDirectoryName": "serverless/serverless-stripe-integration/dev/1649248285076-2022-04-06T12:31:25.076Z",
+    "artifactDirectoryName": "serverless/serverless-stripe-integration/dev/1653897343325-2022-05-30T07:55:43.325Z",
     "artifact": ""
   }
 }

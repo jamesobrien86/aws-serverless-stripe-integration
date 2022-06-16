@@ -42,6 +42,7 @@ const createCheckoutSession = async (
 			subscription_data: {
 				items: [
 					{
+						// hardcored plan id will come from signup when we have a plan
 						plan: "prod_LQa1HdSm54rJDx",
 					},
 				],
